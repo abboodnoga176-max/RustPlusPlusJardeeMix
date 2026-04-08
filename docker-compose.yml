@@ -1,13 +1,28 @@
 version: '3.3'
+
 services:
-    app:
-        volumes:
-            - ./credentials:/app/credentials
-            - ./instances:/app/instances
-            - ./logs:/app/logs
-            - ./maps:/app/maps
-        environment:
-            - RPP_DISCORD_CLIENT_ID=111....1111
-            - RPP_DISCORD_TOKEN=token
-        container_name: rpp
-        image: ghcr.io/alexemanuelol/rustplusplus
+  app:
+    build: .
+    container_name: rpp
+    restart: always
+    
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./credentials:/app/credentials
+      - ./instances:/app/instances
+      - ./logs:/app/logs
+      - ./maps:/app/maps
+
+    environment:
+      # --- Dane do GITA ---
+      - GIT_USER=abboodnoga176-max
+      - GIT_TOKEN=  # Generujesz go w Settings -> Developer Settings na GitHubie
+      - GIT_REPO_URL=github.com/abboodnoga176-max/RustPlusPlusJardeeMix # Bez https:// na początku
+      
+      # --- Twoje zmienne aplikacji ---
+      - RPP_DISCORD_CLIENT_ID=111....1111
+      - RPP_DISCORD_TOKEN=token
+
+    stdin_open: true
+    tty: true
