@@ -1755,6 +1755,7 @@ class RustPlus extends RustPlusLib {
                                     costPerItem: order.costPerItem,
                                     quantity: order.quantity,
                                     amountInStock: order.amountInStock,
+                                    locationString: vendingMachine.location.location,
                                     rate: rate
                                 };
                             }
@@ -1771,7 +1772,7 @@ class RustPlus extends RustPlusLib {
                         const iName = Client.client.items.getName(bestOrder.itemId);
                         const cName = Client.client.items.getName(bestOrder.currencyId);
 
-                        let formattedStr = `${bestOrder.quantity > 1 ? bestOrder.quantity + 'x ' : ''}${iName} -> ${bestOrder.costPerItem} ${cName} (${bestOrder.amountInStock} ${leftString})`;
+                        let formattedStr = `${bestOrder.locationString} | ${bestOrder.quantity > 1 ? bestOrder.quantity + 'x ' : ''}${iName} -> ${bestOrder.costPerItem} ${cName} (${bestOrder.amountInStock} ${leftString})`;
                         result.push(formattedStr);
                     }
                 }
