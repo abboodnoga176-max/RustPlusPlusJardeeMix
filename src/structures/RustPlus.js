@@ -1726,7 +1726,7 @@ class RustPlus extends RustPlusLib {
                     });
                 }
 
-                const locations = [];
+                const bestOrders = {};
                 for (const vendingMachine of this.mapMarkers.vendingMachines) {
                     if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
 
@@ -1744,17 +1744,43 @@ class RustPlus extends RustPlusLib {
                             (orderItemId === parseInt(itemId) || orderCurrencyId === parseInt(itemId))) ||
                             (orderType === 'buy' && orderCurrencyId === parseInt(itemId)) ||
                             (orderType === 'sell' && orderItemId === parseInt(itemId))) {
-                            if (locations.includes(vendingMachine.location.location)) continue;
-                            locations.push(vendingMachine.location.location);
+
+                            const key = `${orderItemId}_${orderCurrencyId}`;
+                            let rate = order.costPerItem / order.quantity;
+
+                            if (!bestOrders[key] || rate < bestOrders[key].rate) {
+                                bestOrders[key] = {
+                                    itemId: orderItemId,
+                                    currencyId: orderCurrencyId,
+                                    costPerItem: order.costPerItem,
+                                    quantity: order.quantity,
+                                    amountInStock: order.amountInStock,
+                                    rate: rate
+                                };
+                            }
                         }
                     }
                 }
 
-                if (locations.length === 0) {
+                const result = [];
+                const leftString = Client.client.intlGet(this.guildId, 'remain');
+
+                for (const key of Object.keys(bestOrders)) {
+                    const bestOrder = bestOrders[key];
+                    if (bestOrder.itemId !== null && bestOrder.currencyId !== null) {
+                        const iName = Client.client.items.getName(bestOrder.itemId);
+                        const cName = Client.client.items.getName(bestOrder.currencyId);
+
+                        let formattedStr = `${bestOrder.quantity > 1 ? bestOrder.quantity + 'x ' : ''}${iName} -> ${bestOrder.costPerItem} ${cName} (${bestOrder.amountInStock} ${leftString})`;
+                        result.push(formattedStr);
+                    }
+                }
+
+                if (result.length === 0) {
                     return Client.client.intlGet(this.guildId, 'noItemFound');
                 }
 
-                return locations.join(', ');
+                return result;
             } break;
 
             case commandSubEn:
