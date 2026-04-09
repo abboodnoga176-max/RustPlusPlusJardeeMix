@@ -786,5 +786,7 @@
     "wipeDetected": "Wipe detetado!",
     "yield": "Rendimento",
     "youAreAlreadyLeader": "Você já é o líder.",
-    "youAreNotPairedWithServer": "O comando Líder não funciona porque você não está emparelhado com o servidor."
+    "youAreNotPairedWithServer": "O comando Líder não funciona porque você não está emparelhado com o servidor.",
+    "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
 }

@@ -786,5 +786,7 @@
     "wipeDetected": "Обнаружен Wipe!",
     "yield": "Урожай",
     "youAreAlreadyLeader": "Вы уже лидер.",
-    "youAreNotPairedWithServer": "Команда лидера не работает, потому что вы не подключены к серверу."
+    "youAreNotPairedWithServer": "Команда лидера не работает, потому что вы не подключены к серверу.",
+    "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
 }
