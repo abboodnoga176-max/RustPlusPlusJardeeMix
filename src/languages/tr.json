@@ -786,5 +786,7 @@
     "wipeDetected": "Wipe tespit edildi!",
     "yield": "Teslim Ol",
     "youAreAlreadyLeader": "Zaten lidersin.",
-    "youAreNotPairedWithServer": "Sunucuyla eşleşmediğiniz için lider komutu çalışmıyor."
+    "youAreNotPairedWithServer": "Sunucuyla eşleşmediğiniz için lider komutu çalışmıyor.",
+    "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
 }

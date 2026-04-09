@@ -786,5 +786,7 @@
     "wipeDetected": "Wipe erkannt!",
     "yield": "Ertrag",
     "youAreAlreadyLeader": "Du bist bereits Anführer.",
-    "youAreNotPairedWithServer": "Anführer-Befehl funktioniert nicht, weil du nicht mit dem Server gekoppelt bist."
+    "youAreNotPairedWithServer": "Anführer-Befehl funktioniert nicht, weil du nicht mit dem Server gekoppelt bist.",
+    "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
 }

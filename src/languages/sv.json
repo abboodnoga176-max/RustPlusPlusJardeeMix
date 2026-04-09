@@ -786,5 +786,7 @@
     "wipeDetected": "Rensning upptäcktes!",
     "yield": "Yield",
     "youAreAlreadyLeader": "Du är redan lagledare.",
-    "youAreNotPairedWithServer": "Leader-kommandot fungerar inte eftersom du inte är parad med servern."
+    "youAreNotPairedWithServer": "Leader-kommandot fungerar inte eftersom du inte är parad med servern.",
+    "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
 }

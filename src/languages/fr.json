@@ -786,5 +786,7 @@
     "wipeDetected": "Wipe detecté!",
     "yield": "Rendement",
     "youAreAlreadyLeader": "Vous êtes déjà le chef du groupe.",
-    "youAreNotPairedWithServer": "La commande Leader ne fonctionne pas car n'est pas associé au serveur."
+    "youAreNotPairedWithServer": "La commande Leader ne fonctionne pas car n'est pas associé au serveur.",
+    "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
 }
