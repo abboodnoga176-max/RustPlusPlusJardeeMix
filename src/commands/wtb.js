@@ -50,7 +50,6 @@ module.exports = {
         const targetItemName = client.items.getName(targetItemId);
 
 
-        const targetScrapId = "-932201673"; // ID for Scrap
 
         const SCRAP_FEE = 20;
         const trades = [];
@@ -59,8 +58,8 @@ module.exports = {
             for (const order of vendingMachine.sellOrders) {
                 if (order.amountInStock === 0) continue;
 
-                const orderItemId = (Object.keys(client.items.items).includes(order.itemId.toString())) ? order.itemId.toString() : null;
-                const orderCurrencyId = (Object.keys(client.items.items).includes(order.currencyId.toString())) ? order.currencyId.toString() : null;
+                const orderItemId = (client.items.itemExist(order.itemId.toString())) ? order.itemId.toString() : null;
+                const orderCurrencyId = (client.items.itemExist(order.currencyId.toString())) ? order.currencyId.toString() : null;
 
                 if (!orderItemId || !orderCurrencyId) continue;
 
@@ -93,7 +92,7 @@ module.exports = {
                 if (trade.outputItem === currentItemId) {
                     if (visitedItems.has(trade.inputItem)) continue;
 
-                    const multiplier = qtyNeeded / trade.outputQty;
+                    const multiplier = Math.ceil(qtyNeeded / trade.outputQty);
                     const nextQtyNeeded = multiplier * trade.inputQty;
                     const nextScrapFees = totalScrapFees + SCRAP_FEE;
 
@@ -173,14 +172,14 @@ module.exports = {
             let line = `+ `;
 
             let runningQty = p.normalizedQty;
-            line += `[${runningQty.toFixed(2)}] ${client.items.getName(p.startItem)} `;
+            line += `[${Math.ceil(runningQty)}] ${client.items.getName(p.startItem)} `;
 
             for (const step of forwardPath) {
                 line += `-> [${step.location}] -> `;
                 // To display what happens after this step:
-                // output of this step = (runningQty / step.inputQty) * step.outputQty
-                runningQty = (runningQty / step.inputQty) * step.outputQty;
-                line += `[${runningQty.toFixed(2)}] ${client.items.getName(step.outputItem)} `;
+                // output of this step = hopMultiplier * step.outputQty
+                runningQty = step.hopMultiplier * step.outputQty;
+                line += `[${Math.ceil(runningQty)}] ${client.items.getName(step.outputItem)} `;
             }
 
             line += `(Total Fees: ${p.totalScrapFees} Scrap)\n`;
