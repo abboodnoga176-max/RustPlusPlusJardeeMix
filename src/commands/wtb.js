@@ -25,7 +25,12 @@ module.exports = {
         if (!await client.validatePermissions(interaction)) return;
         await interaction.deferReply({ ephemeral: true });
 
-        if (!rustplus || !rustplus.mapMarkers || !rustplus.mapMarkers.vendingMachines) {
+        let vendingMachines = [];
+        if (rustplus && rustplus.mapMarkers && rustplus.mapMarkers.vendingMachines) {
+            vendingMachines = rustplus.mapMarkers.vendingMachines;
+        } else if (instance && instance.mapMarkers && instance.mapMarkers.vendingMachines) {
+            vendingMachines = instance.mapMarkers.vendingMachines;
+        } else {
             const str = client.intlGet(interaction.guildId, 'notConnectedToRustServer');
             await client.interactionEditReply(interaction, DiscordEmbeds.getActionInfoEmbed(1, str));
             client.log(client.intlGet(null, 'warningCap'), str);
@@ -53,7 +58,7 @@ module.exports = {
 
         const SCRAP_FEE = 20;
         const trades = [];
-        for (const vendingMachine of rustplus.mapMarkers.vendingMachines) {
+        for (const vendingMachine of vendingMachines) {
             if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
             for (const order of vendingMachine.sellOrders) {
                 if (order.amountInStock === 0) continue;
@@ -71,6 +76,28 @@ module.exports = {
                     location: vendingMachine.location.string,
                     amountInStock: order.amountInStock
                 });
+            }
+        }
+
+        // Add recycle trades (Safe Zone Recycler)
+        if (client.rustlabs && client.rustlabs.recycleData) {
+            for (const [recycleItemId, data] of Object.entries(client.rustlabs.recycleData)) {
+                if (data['safe-zone-recycler'] && data['safe-zone-recycler'].yield) {
+                    for (const yieldItem of data['safe-zone-recycler'].yield) {
+                        // Only consider guaranteed yields for reliable trade paths
+                        if (yieldItem.probability === 1) {
+                            trades.push({
+                                outputItem: yieldItem.id.toString(),
+                                outputQty: yieldItem.quantity,
+                                inputItem: recycleItemId.toString(),
+                                inputQty: 1, // 1 unit recycled yields the specified quantity
+                                location: 'Safe Zone Recycler',
+                                amountInStock: 999999, // Infinite stock for recyclers
+                                isRecycle: true
+                            });
+                        }
+                    }
+                }
             }
         }
 
@@ -93,8 +120,8 @@ module.exports = {
                     if (visitedItems.has(trade.inputItem)) continue;
 
                     const multiplier = Math.ceil(qtyNeeded / trade.outputQty);
-                    const nextQtyNeeded = multiplier * trade.inputQty;
-                    const nextScrapFees = totalScrapFees + SCRAP_FEE;
+                    const nextQtyNeeded = trade.isRecycle ? qtyNeeded / trade.outputQty : multiplier * trade.inputQty;
+                    const nextScrapFees = totalScrapFees + (trade.isRecycle ? 0 : SCRAP_FEE);
 
                     const newVisited = new Set(visitedItems);
                     newVisited.add(trade.inputItem);
