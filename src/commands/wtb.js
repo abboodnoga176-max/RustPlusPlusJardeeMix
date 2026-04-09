@@ -25,7 +25,7 @@ module.exports = {
         if (!await client.validatePermissions(interaction)) return;
         await interaction.deferReply({ ephemeral: true });
 
-        if (!rustplus || (rustplus && !rustplus.isOperational)) {
+        if (!rustplus || !rustplus.mapMarkers || !rustplus.mapMarkers.vendingMachines) {
             const str = client.intlGet(interaction.guildId, 'notConnectedToRustServer');
             await client.interactionEditReply(interaction, DiscordEmbeds.getActionInfoEmbed(1, str));
             client.log(client.intlGet(null, 'warningCap'), str);
@@ -203,7 +203,7 @@ module.exports = {
             color: Constants.COLOR_DEFAULT,
             title: `Trade Routes for ${targetItemName}`,
             description: foundLines,
-            footer: { text: `${instance.serverList[rustplus.serverId].title}` }
+            footer: { text: instance.serverList && rustplus && rustplus.serverId && instance.serverList[rustplus.serverId] ? instance.serverList[rustplus.serverId].title : 'Offline' }
         });
 
         await client.interactionEditReply(interaction, { content: null, embeds: [embed] });
