@@ -151,12 +151,11 @@ module.exports = {
                 }
                 const itemName = client.items.getName(itemId);
 
-                let full = false;
                 let foundLines = '';
                 const unknownString = client.intlGet(interaction.guildId, 'unknown');
                 const leftString = client.intlGet(interaction.guildId, 'remain');
+                const matchingOrders = [];
                 for (const vendingMachine of rustplus.mapMarkers.vendingMachines) {
-                    if (full) break;
                     if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
 
                     for (const order of vendingMachine.sellOrders) {
@@ -177,31 +176,44 @@ module.exports = {
                         const orderCurrencyName = (orderCurrencyId !== null) ?
                             client.items.getName(orderCurrencyId) : unknownString;
 
-                        const prevFoundLines = foundLines;
-
                         if ((orderType === 'all' &&
                             (orderItemId === parseInt(itemId) || orderCurrencyId === parseInt(itemId))) ||
                             (orderType === 'buy' && orderCurrencyId === parseInt(itemId)) ||
                             (orderType === 'sell' && orderItemId === parseInt(itemId))) {
-                            if (foundLines === '') {
-                                foundLines += '```diff\n';
-                            }
 
-                            foundLines += `+ [${vendingMachine.location.string}] `;
-                            foundLines += `${orderQuantity}x ${orderItemName}`;
-                            foundLines += `${(orderItemIsBlueprint) ? ' (BP)' : ''} for `;
-                            foundLines += `${orderCostPerItem}x ${orderCurrencyName}`;
-                            foundLines += `${(orderCurrencyIsBlueprint) ? ' (BP)' : ''} `;
-                            foundLines += `(${orderAmountInStock} ${leftString})\n`;
-
-                            if (foundLines.length >= 4000) {
-                                foundLines = prevFoundLines;
-                                foundLines += `...\n`;
-                                full = true;
-                                break;
-                            }
+                            matchingOrders.push({
+                                vendingMachineLocation: vendingMachine.location.string,
+                                orderQuantity: orderQuantity,
+                                orderItemName: orderItemName,
+                                orderItemIsBlueprint: orderItemIsBlueprint,
+                                orderCostPerItem: orderCostPerItem,
+                                orderCurrencyName: orderCurrencyName,
+                                orderCurrencyIsBlueprint: orderCurrencyIsBlueprint,
+                                orderAmountInStock: orderAmountInStock,
+                                rate: orderCostPerItem / orderQuantity
+                            });
                         }
                     }
+                }
+
+                matchingOrders.sort((a, b) => a.rate - b.rate);
+
+                for (const o of matchingOrders) {
+                    if (foundLines === '') {
+                        foundLines += '```diff\n';
+                    }
+
+                    let line = `+ [${o.vendingMachineLocation}] ${o.orderQuantity}x ${o.orderItemName}`;
+                    line += `${(o.orderItemIsBlueprint) ? ' (BP)' : ''} for `;
+                    line += `${o.orderCostPerItem}x ${o.orderCurrencyName}`;
+                    line += `${(o.orderCurrencyIsBlueprint) ? ' (BP)' : ''} `;
+                    line += `(${o.orderAmountInStock} ${leftString})\n`;
+
+                    if (foundLines.length + line.length >= 4000) {
+                        foundLines += `...\n`;
+                        break;
+                    }
+                    foundLines += line;
                 }
 
                 if (foundLines === '') {

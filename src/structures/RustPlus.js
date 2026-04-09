@@ -1766,8 +1766,9 @@ class RustPlus extends RustPlusLib {
                 const result = [];
                 const leftString = Client.client.intlGet(this.guildId, 'remain');
 
-                for (const key of Object.keys(bestOrders)) {
-                    const bestOrder = bestOrders[key];
+                const sortedBestOrders = Object.values(bestOrders).sort((a, b) => a.rate - b.rate);
+
+                for (const bestOrder of sortedBestOrders) {
                     if (bestOrder.itemId !== null && bestOrder.currencyId !== null) {
                         const iName = Client.client.items.getName(bestOrder.itemId);
                         const cName = Client.client.items.getName(bestOrder.currencyId);
