@@ -37,6 +37,7 @@ module.exports = {
             return;
         }
 
+        const targetScrapId = "-932201673"; // ID for Scrap
         const targetSearchString = interaction.options.getString('name');
 
         let targetItemId = null;
@@ -183,6 +184,13 @@ module.exports = {
         }
 
         const sortedBestPaths = Array.from(bestPaths.values());
+        // Sort by total Scrap fees, and if start item is Scrap, sort by actual amount of Scrap + fees.
+        sortedBestPaths.sort((a, b) => {
+            const aCost = (a.startItem === targetScrapId ? Math.ceil(a.normalizedQty) : 0) + a.totalScrapFees;
+            const bCost = (b.startItem === targetScrapId ? Math.ceil(b.normalizedQty) : 0) + b.totalScrapFees;
+            if (aCost !== bCost) return aCost - bCost;
+            return Math.ceil(a.normalizedQty) - Math.ceil(b.normalizedQty);
+        });
 
         let foundLines = '';
         for (const p of sortedBestPaths) {
