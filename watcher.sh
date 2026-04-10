@@ -39,7 +39,7 @@ start_app
 while true; do
     # Sprawdzanie zmian
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        git fetch origin main
+        git fetch origin
 
         LOCAL=$(git rev-parse HEAD 2>/dev/null)
         REMOTE=$(git rev-parse origin/main 2>/dev/null)
