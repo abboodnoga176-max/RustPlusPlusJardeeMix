@@ -38,7 +38,7 @@ while true; do
         git fetch origin main > /dev/null 2>&1
 
         LOCAL=$(git rev-parse HEAD 2>/dev/null)
-        REMOTE=$(git rev-parse @{u} 2>/dev/null)
+        REMOTE=$(git rev-parse origin/main 2>/dev/null)
 
         if [ -n "$LOCAL" ] && [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
             echo "Zmiany wykryte! Aktualizacja..."
