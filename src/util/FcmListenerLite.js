@@ -240,6 +240,7 @@ async function pairingEntitySmartAlarm(client, guild, title, message, body) {
         active: entityExist ? alarms[body.entityId].active : false,
         reachable: entityExist ? alarms[body.entityId].reachable : true,
         everyone: entityExist ? alarms[body.entityId].everyone : false,
+        multiEveryone: entityExist ? alarms[body.entityId].multiEveryone : false,
         name: entityExist ? alarms[body.entityId].name : client.intlGet(guild.id, 'smartAlarm'),
         message: entityExist ? alarms[body.entityId].message : client.intlGet(guild.id, 'baseIsUnderAttack'),
         lastTrigger: entityExist ? alarms[body.entityId].lastTrigger : null,
