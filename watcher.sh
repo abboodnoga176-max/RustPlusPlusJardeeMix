@@ -7,7 +7,7 @@ GIT_AUTH_URL="https://${GIT_USER}:${GIT_TOKEN}@${GIT_REPO_URL#https://}"
 
 # Ustawienie remote, aby używał tokena
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    git remote set-url origin "$GIT_AUTH_URL" >/dev/null 2>&1 || true
+    git remote set-url origin "$GIT_AUTH_URL" || true
 fi
 
 kill_tree() {
@@ -35,7 +35,7 @@ start_app
 while true; do
     # Sprawdzanie zmian
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        git fetch origin main > /dev/null 2>&1
+        git fetch origin main || true
 
         LOCAL=$(git rev-parse HEAD 2>/dev/null)
         REMOTE=$(git rev-parse origin/main 2>/dev/null)
@@ -43,7 +43,7 @@ while true; do
         if [ -n "$LOCAL" ] && [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
             echo "Zmiany wykryte! Aktualizacja..."
             stop_app
-            git pull origin main >/dev/null 2>&1
+            git pull origin main || true
             npm install
             start_app
         fi
