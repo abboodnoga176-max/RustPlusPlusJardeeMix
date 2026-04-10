@@ -272,14 +272,26 @@ module.exports = {
         const instance = Client.client.getInstance(guildId);
         const entity = instance.serverList[serverId].alarms[entityId];
 
+        let messageContent = '';
+        if (entity.everyone) messageContent = '@everyone';
+        if (entity.multiEveryone) messageContent = '@everyone';
+
         const content = {
             embeds: [await DiscordEmbeds.getAlarmEmbed(guildId, serverId, entityId)],
             files: [new Discord.AttachmentBuilder(
                 Path.join(__dirname, '..', `resources/images/electrics/${entity.image}`))],
-            content: entity.everyone ? '@everyone' : ''
+            content: messageContent
         }
 
         await module.exports.sendMessage(guildId, content, null, instance.channelId.activity);
+
+        if (entity.multiEveryone) {
+            for (let i = 1; i < 5; i++) {
+                setTimeout(async () => {
+                    await module.exports.sendMessage(guildId, { content: '@everyone' }, null, instance.channelId.activity);
+                }, i * 1000);
+            }
+        }
     },
 
     sendServerChangeStateMessage: async function (guildId, serverId, state) {
