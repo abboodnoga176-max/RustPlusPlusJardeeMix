@@ -121,7 +121,7 @@ module.exports = {
                     if (visitedItems.has(trade.inputItem)) continue;
 
                     const multiplier = Math.ceil(qtyNeeded / trade.outputQty);
-                    const nextQtyNeeded = trade.isRecycle ? qtyNeeded / trade.outputQty : multiplier * trade.inputQty;
+                    const nextQtyNeeded = multiplier * trade.inputQty;
                     const nextScrapFees = totalScrapFees + (trade.isRecycle ? 0 : SCRAP_FEE);
 
                     const newVisited = new Set(visitedItems);
@@ -145,51 +145,55 @@ module.exports = {
         const bestPaths = new Map();
 
         for (const p of validPaths) {
-            // How do we calculate cost?
-            // The total cost to get 1 target item is:
-            // p.normalizedQty of p.startItem + p.totalScrapFees
-
-            // To compare apples to apples, we shouldn't convert start items to scrap implicitly unless we have an exchange rate.
-            // But the rule is: "Do not return multiple results starting with the same item type.
-            // If multiple paths start with High Quality Metal, only return the single most efficient path."
-            //
-            // If paths start with the SAME item, the one with the smallest p.normalizedQty is better.
-            // However, scrap fees matter. Wait, can we just use a heuristic to value the total cost?
-            // The prompt says: "The bot must calculate the total cost of the target item by normalizing the value of input items."
-            // But wait, "normalize the value of input items": If you need 10 Scrap + 40 fees vs 5 Scrap + 20 fees, it's obvious.
-            // But if you need 5 HQM + 40 Scrap vs 6 HQM + 20 Scrap, you can't easily compare unless HQM has a Scrap value.
-            // Wait, the prompt implies deduplicating for the *same starting item type*. So if both start with HQM, we need a way to compare.
-            // Let's assume we can't reliably convert HQM to Scrap. We can just sort by `normalizedQty` as the primary driver,
-            // or we could convert Scrap fees to an equivalent cost if startItem is Scrap.
-            // But actually, we just need to compare them. Let's create a score for the path:
-            // Score = normalizedQty. If they are the same start item, lower normalizedQty is better.
-            // What if normalizedQty is the same? Then lower totalScrapFees is better.
-
             const currentBest = bestPaths.get(p.startItem);
 
             if (!currentBest) {
                 bestPaths.set(p.startItem, p);
             } else {
-                // If they are the same start item, we compare them.
-                // We don't have a universal currency conversion for all items.
-                // But wait! We could evaluate the entire cost in terms of Scrap if we trace back to Scrap.
-                // However, the prompt says "unique starting item rule".
-                // Let's compare by normalizedQty first, then totalScrapFees.
-                if (p.normalizedQty < currentBest.normalizedQty) {
+                const pYield = p.path[0].hopMultiplier * p.path[0].outputQty;
+                const currentBestYield = currentBest.path[0].hopMultiplier * currentBest.path[0].outputQty;
+
+                const pRatio = p.normalizedQty / pYield;
+                const currentBestRatio = currentBest.normalizedQty / currentBestYield;
+
+                if (pRatio < currentBestRatio) {
                     bestPaths.set(p.startItem, p);
-                } else if (p.normalizedQty === currentBest.normalizedQty && p.totalScrapFees < currentBest.totalScrapFees) {
-                    bestPaths.set(p.startItem, p);
+                } else if (pRatio === currentBestRatio) {
+                    const pScrapFeePerYield = p.totalScrapFees / pYield;
+                    const currentBestScrapFeePerYield = currentBest.totalScrapFees / currentBestYield;
+
+                    if (pScrapFeePerYield < currentBestScrapFeePerYield) {
+                        bestPaths.set(p.startItem, p);
+                    } else if (pScrapFeePerYield === currentBestScrapFeePerYield) {
+                        if (pYield > currentBestYield) {
+                            bestPaths.set(p.startItem, p);
+                        }
+                    }
                 }
             }
         }
 
         const sortedBestPaths = Array.from(bestPaths.values());
-        // Sort by total Scrap fees, and if start item is Scrap, sort by actual amount of Scrap + fees.
+
         sortedBestPaths.sort((a, b) => {
-            const aCost = (a.startItem === targetScrapId ? Math.ceil(a.normalizedQty) : 0) + a.totalScrapFees;
-            const bCost = (b.startItem === targetScrapId ? Math.ceil(b.normalizedQty) : 0) + b.totalScrapFees;
-            if (aCost !== bCost) return aCost - bCost;
-            return Math.ceil(a.normalizedQty) - Math.ceil(b.normalizedQty);
+            const aYield = a.path[0].hopMultiplier * a.path[0].outputQty;
+            const bYield = b.path[0].hopMultiplier * b.path[0].outputQty;
+
+            const aScrapCost = a.totalScrapFees + (a.startItem === targetScrapId ? a.normalizedQty : 0);
+            const bScrapCost = b.totalScrapFees + (b.startItem === targetScrapId ? b.normalizedQty : 0);
+
+            const aScrapCostPerYield = aScrapCost / aYield;
+            const bScrapCostPerYield = bScrapCost / bYield;
+
+            if (aScrapCostPerYield !== bScrapCostPerYield) {
+                return aScrapCostPerYield - bScrapCostPerYield;
+            }
+
+            if (aYield !== bYield) {
+                return bYield - aYield; // descending yield
+            }
+
+            return a.normalizedQty - b.normalizedQty; // ascending input qty
         });
 
         let foundLines = '';
