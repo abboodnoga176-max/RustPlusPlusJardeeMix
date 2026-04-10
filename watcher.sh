@@ -1,10 +1,14 @@
 #!/bin/bash
 
+git config --global --add safe.directory /app
+
 # Konfiguracja adresu z tokenem (zmienne pobierane z docker-compose)
 GIT_AUTH_URL="https://${GIT_USER}:${GIT_TOKEN}@${GIT_REPO_URL#https://}"
 
 # Ustawienie remote, aby używał tokena
-git remote set-url origin "$GIT_AUTH_URL"
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    git remote set-url origin "$GIT_AUTH_URL" >/dev/null 2>&1 || true
+fi
 
 kill_tree() {
     local _pid=$1
@@ -30,17 +34,19 @@ start_app
 
 while true; do
     # Sprawdzanie zmian
-    git fetch origin main > /dev/null 2>&1
-    
-    LOCAL=$(git rev-parse HEAD)
-    REMOTE=$(git rev-parse @{u})
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        git fetch origin main > /dev/null 2>&1
 
-    if [ "$LOCAL" != "$REMOTE" ]; then
-        echo "Zmiany wykryte! Aktualizacja..."
-        stop_app
-        git pull origin main
-        npm install
-        start_app
+        LOCAL=$(git rev-parse HEAD 2>/dev/null)
+        REMOTE=$(git rev-parse @{u} 2>/dev/null)
+
+        if [ -n "$LOCAL" ] && [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
+            echo "Zmiany wykryte! Aktualizacja..."
+            stop_app
+            git pull origin main >/dev/null 2>&1
+            npm install
+            start_app
+        fi
     fi
 
     sleep 60
