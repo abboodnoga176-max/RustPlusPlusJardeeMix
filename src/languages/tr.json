@@ -788,5 +788,6 @@
     "youAreAlreadyLeader": "Zaten lidersin.",
     "youAreNotPairedWithServer": "Sunucuyla eşleşmediğiniz için lider komutu çalışmıyor.",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
+    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy"
 }
