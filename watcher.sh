@@ -6,6 +6,14 @@ GIT_AUTH_URL="https://${GIT_USER}:${GIT_TOKEN}@${GIT_REPO_URL#https://}"
 # Ustawienie remote, aby używał tokena
 git remote set-url origin "$GIT_AUTH_URL"
 
+kill_tree() {
+    local _pid=$1
+    for _child in $(pgrep -P $_pid 2>/dev/null); do
+        kill_tree $_child
+    done
+    kill $_pid 2>/dev/null
+}
+
 start_app() {
     echo "Uruchamianie aplikacji..."
     npm start &
@@ -14,7 +22,7 @@ start_app() {
 
 stop_app() {
     echo "Zatrzymywanie aplikacji (PID: $APP_PID)..."
-    kill $APP_PID
+    kill_tree $APP_PID
     wait $APP_PID 2>/dev/null
 }
 
