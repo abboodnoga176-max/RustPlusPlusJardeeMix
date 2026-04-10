@@ -1,6 +1,18 @@
 const Builder = require('@discordjs/builders');
 const Constants = require('../util/constants.js');
 const DiscordEmbeds = require('../discordTools/discordEmbeds.js');
+const fs = require('fs');
+const path = require('path');
+
+let allowedRecycleItems = {};
+try {
+    const configPath = path.resolve(__dirname, '../../config/allowedRecycleItems.json');
+    if (fs.existsSync(configPath)) {
+        allowedRecycleItems = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    }
+} catch (err) {
+    console.error('Failed to load allowedRecycleItems config:', err);
+}
 
 module.exports = {
     name: 'wtb',
@@ -12,7 +24,11 @@ module.exports = {
             .addStringOption(option => option
                 .setName('name')
                 .setDescription(client.intlGet(guildId, 'commandsWtbNameDesc') || 'The name or ID of the item you want to buy')
-                .setRequired(true));
+                .setRequired(true))
+            .addIntegerOption(option => option
+                .setName('quantity')
+                .setDescription(client.intlGet(guildId, 'commandsWtbQtyDesc') || 'The minimum quantity of the item you want to buy')
+                .setRequired(false));
     },
 
     async execute(client, interaction) {
@@ -39,6 +55,7 @@ module.exports = {
 
         const targetScrapId = "-932201673"; // ID for Scrap
         const targetSearchString = interaction.options.getString('name');
+        const targetQuantity = interaction.options.getInteger('quantity') || 1;
 
         let targetItemId = null;
         if (client.items.itemExist(targetSearchString)) {
@@ -83,6 +100,10 @@ module.exports = {
         // Add recycle trades (Safe Zone Recycler)
         if (client.rustlabs && client.rustlabs.recycleData) {
             for (const [recycleItemId, data] of Object.entries(client.rustlabs.recycleData)) {
+                if (!allowedRecycleItems[recycleItemId] || !allowedRecycleItems[recycleItemId].allowed) {
+                    continue;
+                }
+
                 if (data['safe-zone-recycler'] && data['safe-zone-recycler'].yield) {
                     for (const yieldItem of data['safe-zone-recycler'].yield) {
                         // Only consider guaranteed yields for reliable trade paths
@@ -135,7 +156,7 @@ module.exports = {
         }
 
         const initialVisited = new Set([targetItemId.toString()]);
-        findPaths(targetItemId.toString(), 1, initialVisited, [], 0);
+        findPaths(targetItemId.toString(), targetQuantity, initialVisited, [], 0);
 
 
         // Debug output

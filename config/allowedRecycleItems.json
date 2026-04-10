@@ -1,0 +1,2474 @@
+{
+  "3222790": {
+    "name": "Hide Halterneck",
+    "allowed": false
+  },
+  "3380160": {
+    "name": "Card Movember Moustache",
+    "allowed": false
+  },
+  "14241751": {
+    "name": "Fire Arrow",
+    "allowed": false
+  },
+  "15388698": {
+    "name": "Stone Barricade",
+    "allowed": false
+  },
+  "20489901": {
+    "name": "Purple Sunglasses",
+    "allowed": false
+  },
+  "21402876": {
+    "name": "Burlap Gloves",
+    "allowed": false
+  },
+  "23352662": {
+    "name": "Large Banner Hanging",
+    "allowed": false
+  },
+  "23391694": {
+    "name": "Bunny Hat",
+    "allowed": false
+  },
+  "28201841": {
+    "name": "M39 Rifle",
+    "allowed": false
+  },
+  "39600618": {
+    "name": "Microphone Stand",
+    "allowed": false
+  },
+  "42535890": {
+    "name": "Medium Animated Neon Sign",
+    "allowed": false
+  },
+  "51984655": {
+    "name": "Incendiary Pistol Bullet",
+    "allowed": false
+  },
+  "60528587": {
+    "name": "Roadsign Horse Armor",
+    "allowed": false
+  },
+  "73681876": {
+    "name": "Tech Trash",
+    "allowed": false
+  },
+  "86840834": {
+    "name": "NVGM Scientist Suit",
+    "allowed": false
+  },
+  "95950017": {
+    "name": "Metal Pipe",
+    "allowed": false
+  },
+  "98508942": {
+    "name": "XXL Picture Frame",
+    "allowed": false
+  },
+  "99588025": {
+    "name": "High External Wooden Wall",
+    "allowed": false
+  },
+  "106959911": {
+    "name": "Light Frankenstein Legs",
+    "allowed": false
+  },
+  "121049755": {
+    "name": "Tall Picture Frame",
+    "allowed": false
+  },
+  "140006625": {
+    "name": "PTZ CCTV Camera",
+    "allowed": false
+  },
+  "143803535": {
+    "name": "F1 Grenade",
+    "allowed": false
+  },
+  "170758448": {
+    "name": "Cockpit With Engine Vehicle Module",
+    "allowed": false
+  },
+  "171931394": {
+    "name": "Stone Pickaxe",
+    "allowed": false
+  },
+  "174866732": {
+    "name": "Variable Zoom Scope",
+    "allowed": false
+  },
+  "176787552": {
+    "name": "Rifle Body",
+    "allowed": false
+  },
+  "177226991": {
+    "name": "Scarecrow",
+    "allowed": false
+  },
+  "190184021": {
+    "name": "Kayak",
+    "allowed": false
+  },
+  "196700171": {
+    "name": "Hide Vest",
+    "allowed": false
+  },
+  "198438816": {
+    "name": "Vending Machine",
+    "allowed": false
+  },
+  "200773292": {
+    "name": "Hammer",
+    "allowed": false
+  },
+  "204391461": {
+    "name": "Coal :(",
+    "allowed": false
+  },
+  "215754713": {
+    "name": "Bone Arrow",
+    "allowed": false
+  },
+  "223891266": {
+    "name": "T-Shirt",
+    "allowed": false
+  },
+  "237239288": {
+    "name": "Pants",
+    "allowed": false
+  },
+  "240752557": {
+    "name": "Tall Weapon Rack",
+    "allowed": false
+  },
+  "254522515": {
+    "name": "Large Medkit",
+    "allowed": false
+  },
+  "261913429": {
+    "name": "White Volcano Firework",
+    "allowed": false
+  },
+  "268565518": {
+    "name": "Storage Vehicle Module",
+    "allowed": false
+  },
+  "271048478": {
+    "name": "Rat Mask",
+    "allowed": false
+  },
+  "273172220": {
+    "name": "Plumber's Trumpet",
+    "allowed": false
+  },
+  "282103175": {
+    "name": "Giant Lollipop Decor",
+    "allowed": false
+  },
+  "286648290": {
+    "name": "Disco Floor",
+    "allowed": false
+  },
+  "296519935": {
+    "name": "Diving Fins",
+    "allowed": false
+  },
+  "304481038": {
+    "name": "Flare",
+    "allowed": false
+  },
+  "343045591": {
+    "name": "MLRS Aiming Module",
+    "allowed": false
+  },
+  "349762871": {
+    "name": "40mm HE Grenade",
+    "allowed": false
+  },
+  "352321488": {
+    "name": "Sunglasses",
+    "allowed": false
+  },
+  "352499047": {
+    "name": "Shotgun Trap",
+    "allowed": false
+  },
+  "359723196": {
+    "name": "Chippy Arcade Game",
+    "allowed": false
+  },
+  "363163265": {
+    "name": "Hose Tool",
+    "allowed": false
+  },
+  "418081930": {
+    "name": "Wood Chestplate",
+    "allowed": false
+  },
+  "442289265": {
+    "name": "Holosight",
+    "allowed": false
+  },
+  "442886268": {
+    "name": "Rocket Launcher",
+    "allowed": false
+  },
+  "443432036": {
+    "name": "Fluid Switch & Pump",
+    "allowed": false
+  },
+  "446206234": {
+    "name": "Torch Holder",
+    "allowed": false
+  },
+  "476066818": {
+    "name": "Cassette - Long",
+    "allowed": false
+  },
+  "479143914": {
+    "name": "Gears",
+    "allowed": false
+  },
+  "486661382": {
+    "name": "Clan Table",
+    "allowed": false
+  },
+  "492357192": {
+    "name": "RAND Switch",
+    "allowed": false
+  },
+  "528668503": {
+    "name": "Flame Turret",
+    "allowed": false
+  },
+  "553270375": {
+    "name": "Large Rechargeable Battery",
+    "allowed": false
+  },
+  "553887414": {
+    "name": "Skull Fire Pit",
+    "allowed": false
+  },
+  "559147458": {
+    "name": "Survival Fish Trap",
+    "allowed": false
+  },
+  "567235583": {
+    "name": "8x Zoom Scope",
+    "allowed": false
+  },
+  "567871954": {
+    "name": "Secretlab Chair",
+    "allowed": false
+  },
+  "573676040": {
+    "name": "Coffin",
+    "allowed": false
+  },
+  "573926264": {
+    "name": "Semi Automatic Body",
+    "allowed": false
+  },
+  "576509618": {
+    "name": "Portable Boom Box",
+    "allowed": false
+  },
+  "588596902": {
+    "name": "Handmade Shell",
+    "allowed": false
+  },
+  "593465182": {
+    "name": "Table",
+    "allowed": false
+  },
+  "596469572": {
+    "name": "RF Transmitter",
+    "allowed": false
+  },
+  "602628465": {
+    "name": "Parachute",
+    "allowed": false
+  },
+  "602741290": {
+    "name": "Burlap Shirt",
+    "allowed": false
+  },
+  "605467368": {
+    "name": "Incendiary 5.56 Rifle Ammo",
+    "allowed": false
+  },
+  "607400343": {
+    "name": "Legacy Wood Shelter",
+    "allowed": false
+  },
+  "610102428": {
+    "name": "Industrial Conveyor",
+    "allowed": false
+  },
+  "613961768": {
+    "name": "Bota Bag",
+    "allowed": false
+  },
+  "615112838": {
+    "name": "Rail Road Planter",
+    "allowed": false
+  },
+  "634478325": {
+    "name": "CCTV Camera",
+    "allowed": false
+  },
+  "642482233": {
+    "name": "Sticks",
+    "allowed": false
+  },
+  "649912614": {
+    "name": "Revolver",
+    "allowed": false
+  },
+  "656371026": {
+    "name": "High Quality Carburetor",
+    "allowed": false
+  },
+  "656371027": {
+    "name": "Medium Quality Carburetor",
+    "allowed": false
+  },
+  "656371028": {
+    "name": "Low Quality Carburetor",
+    "allowed": false
+  },
+  "657352755": {
+    "name": "Beach Table",
+    "allowed": false
+  },
+  "665332906": {
+    "name": "Timer",
+    "allowed": false
+  },
+  "671063303": {
+    "name": "Riot Helmet",
+    "allowed": false
+  },
+  "671706427": {
+    "name": "Reinforced Glass Window",
+    "allowed": false
+  },
+  "674734128": {
+    "name": "Festive Doorway Garland",
+    "allowed": false
+  },
+  "678698219": {
+    "name": "M4 Shotgun",
+    "allowed": false
+  },
+  "696029452": {
+    "name": "Paper Map",
+    "allowed": false
+  },
+  "699075597": {
+    "name": "Wooden Cross",
+    "allowed": false
+  },
+  "703057617": {
+    "name": "Military Flame Thrower",
+    "allowed": false
+  },
+  "709206314": {
+    "name": "Tiger Mask",
+    "allowed": false
+  },
+  "722955039": {
+    "name": "Water Gun",
+    "allowed": false
+  },
+  "742745918": {
+    "name": "Industrial Splitter",
+    "allowed": false
+  },
+  "762289806": {
+    "name": "Siren Light",
+    "allowed": false
+  },
+  "782422285": {
+    "name": "Sofa - Pattern",
+    "allowed": false
+  },
+  "785728077": {
+    "name": "Pistol Bullet",
+    "allowed": false
+  },
+  "794356786": {
+    "name": "Hide Boots",
+    "allowed": false
+  },
+  "794443127": {
+    "name": "Christmas Tree",
+    "allowed": false
+  },
+  "795236088": {
+    "name": "Torch",
+    "allowed": false
+  },
+  "795371088": {
+    "name": "Pump Shotgun",
+    "allowed": false
+  },
+  "803222026": {
+    "name": "Repair Bench",
+    "allowed": false
+  },
+  "809199956": {
+    "name": "Gravestone",
+    "allowed": false
+  },
+  "809942731": {
+    "name": "Scarecrow Wrap",
+    "allowed": false
+  },
+  "818877484": {
+    "name": "Semi-Automatic Pistol",
+    "allowed": false
+  },
+  "826309791": {
+    "name": "Two Sided Town Sign Post",
+    "allowed": false
+  },
+  "832133926": {
+    "name": "Wood Armor Pants",
+    "allowed": false
+  },
+  "833533164": {
+    "name": "Large Wood Box",
+    "allowed": false
+  },
+  "835042040": {
+    "name": "Medium Frankenstein Legs",
+    "allowed": false
+  },
+  "838308300": {
+    "name": "Burst Module",
+    "allowed": false
+  },
+  "850280505": {
+    "name": "Bucket Helmet",
+    "allowed": false
+  },
+  "853471967": {
+    "name": "Laser Light",
+    "allowed": false
+  },
+  "866332017": {
+    "name": "Large Neon Sign",
+    "allowed": false
+  },
+  "866889860": {
+    "name": "Wooden Barricade",
+    "allowed": false
+  },
+  "884424049": {
+    "name": "Compound Bow",
+    "allowed": false
+  },
+  "888415708": {
+    "name": "RF Receiver",
+    "allowed": false
+  },
+  "895374329": {
+    "name": "Passenger Vehicle Module",
+    "allowed": false
+  },
+  "915408809": {
+    "name": "40mm Smoke Grenade",
+    "allowed": false
+  },
+  "926800282": {
+    "name": "Medium Quality Valves",
+    "allowed": false
+  },
+  "935606207": {
+    "name": "Minigun",
+    "allowed": false
+  },
+  "935692442": {
+    "name": "Longsleeve T-Shirt",
+    "allowed": false
+  },
+  "936496778": {
+    "name": "Floor grill",
+    "allowed": false
+  },
+  "952603248": {
+    "name": "Weapon flashlight",
+    "allowed": false
+  },
+  "960673498": {
+    "name": "Large Hunting Trophy",
+    "allowed": false
+  },
+  "962186730": {
+    "name": "Tin Can Alarm",
+    "allowed": false
+  },
+  "963906841": {
+    "name": "Rock",
+    "allowed": false
+  },
+  "968019378": {
+    "name": "Clatter Helmet",
+    "allowed": false
+  },
+  "968421290": {
+    "name": "Connected Speaker",
+    "allowed": false
+  },
+  "975983052": {
+    "name": "Twitch Rivals Trophy",
+    "allowed": false
+  },
+  "980333378": {
+    "name": "Hide Poncho",
+    "allowed": false
+  },
+  "988652725": {
+    "name": "Smart Switch",
+    "allowed": false
+  },
+  "999690781": {
+    "name": "Geiger Counter",
+    "allowed": false
+  },
+  "1055319033": {
+    "name": "40mm Shotgun Round",
+    "allowed": false
+  },
+  "1058261682": {
+    "name": "Christmas Lights",
+    "allowed": false
+  },
+  "1072924620": {
+    "name": "High Quality Spark Plugs",
+    "allowed": false
+  },
+  "1079279582": {
+    "name": "Medical Syringe",
+    "allowed": false
+  },
+  "1081315464": {
+    "name": "Nest Hat",
+    "allowed": false
+  },
+  "1090916276": {
+    "name": "Pitchfork",
+    "allowed": false
+  },
+  "1099314009": {
+    "name": "Barbeque",
+    "allowed": false
+  },
+  "1103488722": {
+    "name": "Snowball Gun",
+    "allowed": false
+  },
+  "1104520648": {
+    "name": "Chainsaw",
+    "allowed": false
+  },
+  "1107575710": {
+    "name": "Arctic Scientist Suit",
+    "allowed": false
+  },
+  "1110385766": {
+    "name": "Metal Chest Plate",
+    "allowed": false
+  },
+  "1132603396": {
+    "name": "Weapon Rack Stand",
+    "allowed": false
+  },
+  "1142993169": {
+    "name": "Ceiling Light",
+    "allowed": false
+  },
+  "1149964039": {
+    "name": "Storage Monitor",
+    "allowed": false
+  },
+  "1153652756": {
+    "name": "Large Wooden Sign",
+    "allowed": false
+  },
+  "1158340331": {
+    "name": "Medium Quality Crankshaft",
+    "allowed": false
+  },
+  "1158340332": {
+    "name": "High Quality Crankshaft",
+    "allowed": false
+  },
+  "1158340334": {
+    "name": "Low Quality Crankshaft",
+    "allowed": false
+  },
+  "1159991980": {
+    "name": "Code Lock",
+    "allowed": false
+  },
+  "1160881421": {
+    "name": "Hitch & Trough",
+    "allowed": false
+  },
+  "1168856825": {
+    "name": "Metal Detector",
+    "allowed": false
+  },
+  "1171735914": {
+    "name": "AND Switch",
+    "allowed": false
+  },
+  "1177596584": {
+    "name": "Elevator",
+    "allowed": false
+  },
+  "1181207482": {
+    "name": "Heavy Plate Helmet",
+    "allowed": false
+  },
+  "1186655046": {
+    "name": "Fuel Tank Vehicle Module",
+    "allowed": false
+  },
+  "1199391518": {
+    "name": "Road Signs",
+    "allowed": false
+  },
+  "1205084994": {
+    "name": "Large Photo Frame",
+    "allowed": false
+  },
+  "1205607945": {
+    "name": "Two Sided Hanging Sign",
+    "allowed": false
+  },
+  "1221063409": {
+    "name": "Armored Double Door",
+    "allowed": false
+  },
+  "1230323789": {
+    "name": "SMG Body",
+    "allowed": false
+  },
+  "1234878710": {
+    "name": "Telephone",
+    "allowed": false
+  },
+  "1234880403": {
+    "name": "Sewing Kit",
+    "allowed": false
+  },
+  "1242482355": {
+    "name": "Jack O Lantern Angry",
+    "allowed": false
+  },
+  "1242522330": {
+    "name": "Cursed Cauldron",
+    "allowed": false
+  },
+  "1248356124": {
+    "name": "Timed Explosive Charge",
+    "allowed": false
+  },
+  "1259919256": {
+    "name": "Mixing Table",
+    "allowed": false
+  },
+  "1263920163": {
+    "name": "Smoke Grenade",
+    "allowed": false
+  },
+  "1266491000": {
+    "name": "Hazmat Suit",
+    "allowed": false
+  },
+  "1268178466": {
+    "name": "Green Industrial Wall Light",
+    "allowed": false
+  },
+  "1272430949": {
+    "name": "Wheelbarrow Piano",
+    "allowed": false
+  },
+  "1293102274": {
+    "name": "XOR Switch",
+    "allowed": false
+  },
+  "1296788329": {
+    "name": "Homing Missile",
+    "allowed": false
+  },
+  "1305578813": {
+    "name": "Small Neon Sign",
+    "allowed": false
+  },
+  "1307626005": {
+    "name": "Storage Barrel Vertical",
+    "allowed": false
+  },
+  "1315082560": {
+    "name": "Ox Mask",
+    "allowed": false
+  },
+  "1318558775": {
+    "name": "MP5A4",
+    "allowed": false
+  },
+  "1324203999": {
+    "name": "Champagne Boomer",
+    "allowed": false
+  },
+  "1326180354": {
+    "name": "Salvaged Sword",
+    "allowed": false
+  },
+  "1327005675": {
+    "name": "Short Ice Wall",
+    "allowed": false
+  },
+  "1330084809": {
+    "name": "Low Quality Valves",
+    "allowed": false
+  },
+  "1346158228": {
+    "name": "Pumpkin Basket",
+    "allowed": false
+  },
+  "1353298668": {
+    "name": "Armored Door",
+    "allowed": false
+  },
+  "1358643074": {
+    "name": "Snow Machine",
+    "allowed": false
+  },
+  "1361520181": {
+    "name": "Minecart Planter",
+    "allowed": false
+  },
+  "1366282552": {
+    "name": "Leather Gloves",
+    "allowed": false
+  },
+  "1371909803": {
+    "name": "Tesla Coil",
+    "allowed": false
+  },
+  "1373240771": {
+    "name": "Wooden Barricade Cover",
+    "allowed": false
+  },
+  "1373971859": {
+    "name": "Python Revolver",
+    "allowed": false
+  },
+  "1376065505": {
+    "name": "Rear Seats Vehicle Module",
+    "allowed": false
+  },
+  "1382263453": {
+    "name": "Barbed Wooden Barricade",
+    "allowed": false
+  },
+  "1390353317": {
+    "name": "Sheet Metal Double Door",
+    "allowed": false
+  },
+  "1400460850": {
+    "name": "Saddle bag",
+    "allowed": false
+  },
+  "1401987718": {
+    "name": "Duct Tape",
+    "allowed": false
+  },
+  "1409529282": {
+    "name": "Door Closer",
+    "allowed": false
+  },
+  "1413014235": {
+    "name": "Fridge",
+    "allowed": false
+  },
+  "1414245162": {
+    "name": "Note",
+    "allowed": false
+  },
+  "1414245522": {
+    "name": "Rope",
+    "allowed": false
+  },
+  "1424075905": {
+    "name": "Water Bucket",
+    "allowed": false
+  },
+  "1430085198": {
+    "name": "Industrial Crafter",
+    "allowed": false
+  },
+  "1443579727": {
+    "name": "Hunting Bow",
+    "allowed": false
+  },
+  "1451568081": {
+    "name": "Chainlink Fence Gate",
+    "allowed": false
+  },
+  "1478091698": {
+    "name": "Muzzle Brake",
+    "allowed": false
+  },
+  "1488979457": {
+    "name": "Jackhammer",
+    "allowed": false
+  },
+  "1491189398": {
+    "name": "Paddle",
+    "allowed": false
+  },
+  "1491753484": {
+    "name": "Medium Frankenstein Torso",
+    "allowed": false
+  },
+  "1516985844": {
+    "name": "Netting",
+    "allowed": false
+  },
+  "1521286012": {
+    "name": "Double Sign Post",
+    "allowed": false
+  },
+  "1523195708": {
+    "name": "Targeting Computer",
+    "allowed": false
+  },
+  "1523403414": {
+    "name": "Cassette - Short",
+    "allowed": false
+  },
+  "1524187186": {
+    "name": "Workbench Level 1",
+    "allowed": false
+  },
+  "1524980732": {
+    "name": "Carvable Pumpkin",
+    "allowed": false
+  },
+  "1525520776": {
+    "name": "Building Plan",
+    "allowed": false
+  },
+  "1534542921": {
+    "name": "Chair",
+    "allowed": false
+  },
+  "1538126328": {
+    "name": "Industrial Combiner",
+    "allowed": false
+  },
+  "1540934679": {
+    "name": "Wooden Spear",
+    "allowed": false
+  },
+  "1542290441": {
+    "name": "Single Sign Post",
+    "allowed": false
+  },
+  "1545779598": {
+    "name": "Assault Rifle",
+    "allowed": false
+  },
+  "1556365900": {
+    "name": "Molotov Cocktail",
+    "allowed": false
+  },
+  "1559779253": {
+    "name": "Engine Vehicle Module",
+    "allowed": false
+  },
+  "1559915778": {
+    "name": "Single Horse Saddle",
+    "allowed": false
+  },
+  "1569882109": {
+    "name": "Handmade Fishing Rod",
+    "allowed": false
+  },
+  "1575635062": {
+    "name": "Frankenstein Table",
+    "allowed": false
+  },
+  "1581210395": {
+    "name": "Large Planter Box",
+    "allowed": false
+  },
+  "1588298435": {
+    "name": "Bolt Action Rifle",
+    "allowed": false
+  },
+  "1588492232": {
+    "name": "Drone",
+    "allowed": false
+  },
+  "1601468620": {
+    "name": "Blue Jumpsuit",
+    "allowed": false
+  },
+  "1602646136": {
+    "name": "Stone Spear",
+    "allowed": false
+  },
+  "1603174987": {
+    "name": "Confetti Cannon",
+    "allowed": false
+  },
+  "1608640313": {
+    "name": "Tank Top",
+    "allowed": false
+  },
+  "1614528785": {
+    "name": "Heavy Frankenstein Torso",
+    "allowed": false
+  },
+  "1619039771": {
+    "name": "Digital Clock",
+    "allowed": false
+  },
+  "1623701499": {
+    "name": "Industrial Wall Light",
+    "allowed": false
+  },
+  "1629293099": {
+    "name": "Snowman",
+    "allowed": false
+  },
+  "1638322904": {
+    "name": "Incendiary Rocket",
+    "allowed": false
+  },
+  "1643667218": {
+    "name": "Large Animated Neon Sign",
+    "allowed": false
+  },
+  "1655650836": {
+    "name": "Metal Barricade",
+    "allowed": false
+  },
+  "1655979682": {
+    "name": "Empty Can Of Beans",
+    "allowed": false
+  },
+  "1658229558": {
+    "name": "Lantern",
+    "allowed": false
+  },
+  "1659114910": {
+    "name": "Gas Mask",
+    "allowed": false
+  },
+  "1659447559": {
+    "name": "Wooden Horse Armor",
+    "allowed": false
+  },
+  "1675639563": {
+    "name": "Beenie Hat",
+    "allowed": false
+  },
+  "1686524871": {
+    "name": "Decorative Gingerbread Men",
+    "allowed": false
+  },
+  "1696050067": {
+    "name": "Modular Car Lift",
+    "allowed": false
+  },
+  "1697996440": {
+    "name": "Landscape Photo Frame",
+    "allowed": false
+  },
+  "1711033574": {
+    "name": "Bone Club",
+    "allowed": false
+  },
+  "1712070256": {
+    "name": "HV 5.56 Rifle Ammo",
+    "allowed": false
+  },
+  "1714496074": {
+    "name": "Candle Hat",
+    "allowed": false
+  },
+  "1722154847": {
+    "name": "Hide Pants",
+    "allowed": false
+  },
+  "1723747470": {
+    "name": "Tree Lights",
+    "allowed": false
+  },
+  "1729120840": {
+    "name": "Wooden Door",
+    "allowed": false
+  },
+  "1729712564": {
+    "name": "Portrait Photo Frame",
+    "allowed": false
+  },
+  "1744298439": {
+    "name": "Blue Boomer",
+    "allowed": false
+  },
+  "1746956556": {
+    "name": "Bone Armor",
+    "allowed": false
+  },
+  "1751045826": {
+    "name": "Hoodie",
+    "allowed": false
+  },
+  "1784406797": {
+    "name": "Sousaphone",
+    "allowed": false
+  },
+  "1796682209": {
+    "name": "Custom SMG",
+    "allowed": false
+  },
+  "1803831286": {
+    "name": "Garry's Mod Tool Gun",
+    "allowed": false
+  },
+  "1814288539": {
+    "name": "Bone Knife",
+    "allowed": false
+  },
+  "1819863051": {
+    "name": "Sky Lantern",
+    "allowed": false
+  },
+  "1835946060": {
+    "name": "Cable Tunnel",
+    "allowed": false
+  },
+  "1840570710": {
+    "name": "Above Ground Pool",
+    "allowed": false
+  },
+  "1840822026": {
+    "name": "Beancan Grenade",
+    "allowed": false
+  },
+  "1849887541": {
+    "name": "Small Generator",
+    "allowed": false
+  },
+  "1850456855": {
+    "name": "Road Sign Kilt",
+    "allowed": false
+  },
+  "1856217390": {
+    "name": "Egg Basket",
+    "allowed": false
+  },
+  "1865253052": {
+    "name": "Dracula Mask",
+    "allowed": false
+  },
+  "1874610722": {
+    "name": "Armored Cockpit Vehicle Module",
+    "allowed": false
+  },
+  "1877339384": {
+    "name": "Burlap Headwrap",
+    "allowed": false
+  },
+  "1882709339": {
+    "name": "Metal Blade",
+    "allowed": false
+  },
+  "1883981798": {
+    "name": "Low Quality Pistons",
+    "allowed": false
+  },
+  "1883981800": {
+    "name": "High Quality Pistons",
+    "allowed": false
+  },
+  "1883981801": {
+    "name": "Medium Quality Pistons",
+    "allowed": false
+  },
+  "1885488976": {
+    "name": "Spooky Speaker",
+    "allowed": false
+  },
+  "1895235349": {
+    "name": "Disco Ball",
+    "allowed": false
+  },
+  "1903654061": {
+    "name": "Small Planter Box",
+    "allowed": false
+  },
+  "1914691295": {
+    "name": "Prototype 17",
+    "allowed": false
+  },
+  "1946219319": {
+    "name": "Camp Fire",
+    "allowed": false
+  },
+  "1948067030": {
+    "name": "Ladder Hatch",
+    "allowed": false
+  },
+  "1950721418": {
+    "name": "Salvaged Shelves",
+    "allowed": false
+  },
+  "1951603367": {
+    "name": "Switch",
+    "allowed": false
+  },
+  "1953903201": {
+    "name": "Nailgun",
+    "allowed": false
+  },
+  "1965232394": {
+    "name": "Crossbow",
+    "allowed": false
+  },
+  "1973949960": {
+    "name": "Frontier Bolts Single Item Rack",
+    "allowed": false
+  },
+  "1975934948": {
+    "name": "Survey Charge",
+    "allowed": false
+  },
+  "1983621560": {
+    "name": "Floor triangle grill",
+    "allowed": false
+  },
+  "1989785143": {
+    "name": "High Quality Horse Shoes",
+    "allowed": false
+  },
+  "1992974553": {
+    "name": "Burlap Trousers",
+    "allowed": false
+  },
+  "2005491391": {
+    "name": "Extended Magazine",
+    "allowed": false
+  },
+  "2009734114": {
+    "name": "Christmas Door Wreath",
+    "allowed": false
+  },
+  "2019042823": {
+    "name": "Tarp",
+    "allowed": false
+  },
+  "2023888403": {
+    "name": "Medium Rechargeable Battery",
+    "allowed": false
+  },
+  "2040726127": {
+    "name": "Combat Knife",
+    "allowed": false
+  },
+  "2041899972": {
+    "name": "Triangle Ladder Hatch",
+    "allowed": false
+  },
+  "2068884361": {
+    "name": "Small Backpack",
+    "allowed": false
+  },
+  "2070189026": {
+    "name": "Large Banner on pole",
+    "allowed": false
+  },
+  "2087678962": {
+    "name": "Search Light",
+    "allowed": false
+  },
+  "2090395347": {
+    "name": "Large Solar Panel",
+    "allowed": false
+  },
+  "2100007442": {
+    "name": "Audio Alarm",
+    "allowed": false
+  },
+  "2104517339": {
+    "name": "Strobe Light",
+    "allowed": false
+  },
+  "2106561762": {
+    "name": "Decorative Tinsel",
+    "allowed": false
+  },
+  "2114754781": {
+    "name": "Water Purifier",
+    "allowed": false
+  },
+  "2126889441": {
+    "name": "Santa Beard",
+    "allowed": false
+  },
+  "-1685290200": {
+    "name": "12 Gauge Buckshot",
+    "allowed": false
+  },
+  "-1036635990": {
+    "name": "12 Gauge Incendiary Shell",
+    "allowed": false
+  },
+  "-727717969": {
+    "name": "12 Gauge Slug",
+    "allowed": false
+  },
+  "-1211166256": {
+    "name": "5.56 Rifle Ammo",
+    "allowed": false
+  },
+  "-2124352573": {
+    "name": "Acoustic Guitar",
+    "allowed": false
+  },
+  "-2027793839": {
+    "name": "Advent Calendar",
+    "allowed": false
+  },
+  "-1615281216": {
+    "name": "Armored Passenger Vehicle Module",
+    "allowed": false
+  },
+  "-2139580305": {
+    "name": "Auto Turret",
+    "allowed": false
+  },
+  "-2072273936": {
+    "name": "Bandage",
+    "allowed": false
+  },
+  "-702051347": {
+    "name": "Bandana Mask",
+    "allowed": false
+  },
+  "-1622110948": {
+    "name": "Bandit Guard Gear",
+    "allowed": false
+  },
+  "-1022661119": {
+    "name": "Baseball Cap",
+    "allowed": false
+  },
+  "-1211268013": {
+    "name": "Basic Horse Shoes",
+    "allowed": false
+  },
+  "-1274093662": {
+    "name": "Bath Tub Planter",
+    "allowed": false
+  },
+  "-321431890": {
+    "name": "Beach Chair",
+    "allowed": false
+  },
+  "-1621539785": {
+    "name": "Beach Parasol",
+    "allowed": false
+  },
+  "-8312704": {
+    "name": "Beach Towel",
+    "allowed": false
+  },
+  "-1273339005": {
+    "name": "Bed",
+    "allowed": false
+  },
+  "-1262185308": {
+    "name": "Binoculars",
+    "allowed": false
+  },
+  "-690968985": {
+    "name": "Blocker",
+    "allowed": false
+  },
+  "-515830359": {
+    "name": "Blue Roman Candle",
+    "allowed": false
+  },
+  "-1903165497": {
+    "name": "Bone Helmet",
+    "allowed": false
+  },
+  "-1478094705": {
+    "name": "Boogie Board",
+    "allowed": false
+  },
+  "-1113501606": {
+    "name": "Boom Box",
+    "allowed": false
+  },
+  "-23994173": {
+    "name": "Boonie Hat",
+    "allowed": false
+  },
+  "-1549739227": {
+    "name": "Boots",
+    "allowed": false
+  },
+  "-1004426654": {
+    "name": "Bunny Ears",
+    "allowed": false
+  },
+  "-1266045928": {
+    "name": "Bunny Onesie",
+    "allowed": false
+  },
+  "-761829530": {
+    "name": "Burlap Shoes",
+    "allowed": false
+  },
+  "-194509282": {
+    "name": "Butcher Knife",
+    "allowed": false
+  },
+  "-1778897469": {
+    "name": "Button",
+    "allowed": false
+  },
+  "-1040518150": {
+    "name": "Camper Vehicle Module",
+    "allowed": false
+  },
+  "-1379036069": {
+    "name": "Canbourine",
+    "allowed": false
+  },
+  "-912398867": {
+    "name": "Cassette - Medium",
+    "allowed": false
+  },
+  "-1530414568": {
+    "name": "Cassette Recorder",
+    "allowed": false
+  },
+  "-1117626326": {
+    "name": "Chainlink Fence",
+    "allowed": false
+  },
+  "-152332823": {
+    "name": "Chicken Costume",
+    "allowed": false
+  },
+  "-1916473915": {
+    "name": "Chinese Lantern",
+    "allowed": false
+  },
+  "-770304148": {
+    "name": "Chinese Lantern White",
+    "allowed": false
+  },
+  "-1501451746": {
+    "name": "Cockpit Vehicle Module",
+    "allowed": false
+  },
+  "-803263829": {
+    "name": "Coffee Can Helmet",
+    "allowed": false
+  },
+  "-1488398114": {
+    "name": "Composter",
+    "allowed": false
+  },
+  "-1588628467": {
+    "name": "Computer Station",
+    "allowed": false
+  },
+  "-1950721390": {
+    "name": "Concrete Barricade",
+    "allowed": false
+  },
+  "-216999575": {
+    "name": "Counter",
+    "allowed": false
+  },
+  "-1049881973": {
+    "name": "Cowbell",
+    "allowed": false
+  },
+  "-1667224349": {
+    "name": "Decorative Baubels",
+    "allowed": false
+  },
+  "-129230242": {
+    "name": "Decorative Pinecones",
+    "allowed": false
+  },
+  "-209869746": {
+    "name": "Decorative Plastic Candy Canes",
+    "allowed": false
+  },
+  "-151387974": {
+    "name": "Deluxe Christmas Lights",
+    "allowed": false
+  },
+  "-113413047": {
+    "name": "Diving Mask",
+    "allowed": false
+  },
+  "-2022172587": {
+    "name": "Diving Tank",
+    "allowed": false
+  },
+  "-502177121": {
+    "name": "Door Controller",
+    "allowed": false
+  },
+  "-1112793865": {
+    "name": "Door Key",
+    "allowed": false
+  },
+  "-765183617": {
+    "name": "Double Barrel Shotgun",
+    "allowed": false
+  },
+  "-1323101799": {
+    "name": "Double Horse Saddle",
+    "allowed": false
+  },
+  "-258574361": {
+    "name": "Dracula Cape",
+    "allowed": false
+  },
+  "-854270928": {
+    "name": "Dragon Door Knocker",
+    "allowed": false
+  },
+  "-22883916": {
+    "name": "Dragon Mask",
+    "allowed": false
+  },
+  "-1519126340": {
+    "name": "Drop Box",
+    "allowed": false
+  },
+  "-979302481": {
+    "name": "Easter Door Wreath",
+    "allowed": false
+  },
+  "-747743875": {
+    "name": "Egg Suit",
+    "allowed": false
+  },
+  "-1196547867": {
+    "name": "Electric Furnace",
+    "allowed": false
+  },
+  "-629028935": {
+    "name": "Electric Fuse",
+    "allowed": false
+  },
+  "-784870360": {
+    "name": "Electric Heater",
+    "allowed": false
+  },
+  "-1448252298": {
+    "name": "Electrical Branch",
+    "allowed": false
+  },
+  "-1673693549": {
+    "name": "Empty Propane Tank",
+    "allowed": false
+  },
+  "-1557377697": {
+    "name": "Empty Tuna Can",
+    "allowed": false
+  },
+  "-75944661": {
+    "name": "Eoka Pistol",
+    "allowed": false
+  },
+  "-1321651331": {
+    "name": "Explosive 5.56 Rifle Ammo",
+    "allowed": false
+  },
+  "-592016202": {
+    "name": "Explosives",
+    "allowed": false
+  },
+  "-1230433643": {
+    "name": "Festive Double Doorway Garland",
+    "allowed": false
+  },
+  "-1379835144": {
+    "name": "Festive Window Garland",
+    "allowed": false
+  },
+  "-1961560162": {
+    "name": "Firecracker String",
+    "allowed": false
+  },
+  "-1913996738": {
+    "name": "Fish Trophy",
+    "allowed": false
+  },
+  "-1215753368": {
+    "name": "Flame Thrower",
+    "allowed": false
+  },
+  "-936921910": {
+    "name": "Flashbang",
+    "allowed": false
+  },
+  "-939424778": {
+    "name": "Flasher Light",
+    "allowed": false
+  },
+  "-196667575": {
+    "name": "Flashlight",
+    "allowed": false
+  },
+  "-1880231361": {
+    "name": "Flatbed Vehicle Module",
+    "allowed": false
+  },
+  "-265292885": {
+    "name": "Fluid Combiner",
+    "allowed": false
+  },
+  "-1166712463": {
+    "name": "Fluid Splitter",
+    "allowed": false
+  },
+  "-1973785141": {
+    "name": "Fogger-3000",
+    "allowed": false
+  },
+  "-1000573653": {
+    "name": "Frog Boots",
+    "allowed": false
+  },
+  "-52398594": {
+    "name": "Frontier Horns Single Item Rack",
+    "allowed": false
+  },
+  "-849373693": {
+    "name": "Frontier Horseshoe Single Item Rack",
+    "allowed": false
+  },
+  "-1999722522": {
+    "name": "Furnace",
+    "allowed": false
+  },
+  "-148794216": {
+    "name": "Garage Door",
+    "allowed": false
+  },
+  "-1767794021": {
+    "name": "Gas Compression Overdrive",
+    "allowed": false
+  },
+  "-1043618880": {
+    "name": "Ghost Costume",
+    "allowed": false
+  },
+  "-695124222": {
+    "name": "Giant Candy Decor",
+    "allowed": false
+  },
+  "-1679267738": {
+    "name": "Graveyard Fence",
+    "allowed": false
+  },
+  "-656349006": {
+    "name": "Green Boomer",
+    "allowed": false
+  },
+  "-1306288356": {
+    "name": "Green Roman Candle",
+    "allowed": false
+  },
+  "-265876753": {
+    "name": "Gun Powder",
+    "allowed": false
+  },
+  "-839576748": {
+    "name": "Handcuffs",
+    "allowed": false
+  },
+  "-1252059217": {
+    "name": "Hatchet",
+    "allowed": false
+  },
+  "-1696379844": {
+    "name": "Hazmat Youtooz",
+    "allowed": false
+  },
+  "-1507239837": {
+    "name": "HBHF Sensor",
+    "allowed": false
+  },
+  "-1569700847": {
+    "name": "Headset",
+    "allowed": false
+  },
+  "-297099594": {
+    "name": "Heavy Frankenstein Head",
+    "allowed": false
+  },
+  "-2024549027": {
+    "name": "Heavy Frankenstein Legs",
+    "allowed": false
+  },
+  "-1102429027": {
+    "name": "Heavy Plate Jacket",
+    "allowed": false
+  },
+  "-1778159885": {
+    "name": "Heavy Plate Pants",
+    "allowed": false
+  },
+  "-1772746857": {
+    "name": "Heavy Scientist Suit",
+    "allowed": false
+  },
+  "-722629980": {
+    "name": "Heavy Scientist Youtooz",
+    "allowed": false
+  },
+  "-1773144852": {
+    "name": "Hide Skirt",
+    "allowed": false
+  },
+  "-691113464": {
+    "name": "High External Stone Gate",
+    "allowed": false
+  },
+  "-967648160": {
+    "name": "High External Stone Wall",
+    "allowed": false
+  },
+  "-335089230": {
+    "name": "High External Wooden Gate",
+    "allowed": false
+  },
+  "-985781766": {
+    "name": "High Ice Wall",
+    "allowed": false
+  },
+  "-1802083073": {
+    "name": "High Quality Valves",
+    "allowed": false
+  },
+  "-1023065463": {
+    "name": "High Velocity Arrow",
+    "allowed": false
+  },
+  "-1841918730": {
+    "name": "High Velocity Rocket",
+    "allowed": false
+  },
+  "-1214542497": {
+    "name": "HMLMG",
+    "allowed": false
+  },
+  "-1442559428": {
+    "name": "Hobo Barrel",
+    "allowed": false
+  },
+  "-1663759755": {
+    "name": "Homemade Landmine",
+    "allowed": false
+  },
+  "-218009552": {
+    "name": "Homing Missile Launcher",
+    "allowed": false
+  },
+  "-246672609": {
+    "name": "Horizontal Weapon Rack",
+    "allowed": false
+  },
+  "-1997543660": {
+    "name": "Horse Saddle",
+    "allowed": false
+  },
+  "-1989600732": {
+    "name": "Hot Air Balloon Armor",
+    "allowed": false
+  },
+  "-143132326": {
+    "name": "Huge Wooden Sign",
+    "allowed": false
+  },
+  "-1691396643": {
+    "name": "HV Pistol Ammo",
+    "allowed": false
+  },
+  "-44876289": {
+    "name": "Igniter",
+    "allowed": false
+  },
+  "-2012470695": {
+    "name": "Improvised Balaclava",
+    "allowed": false
+  },
+  "-697981032": {
+    "name": "Inner Tube",
+    "allowed": false
+  },
+  "-2001260025": {
+    "name": "Instant Camera",
+    "allowed": false
+  },
+  "-1824943010": {
+    "name": "Jack O Lantern Happy",
+    "allowed": false
+  },
+  "-1163532624": {
+    "name": "Jacket",
+    "allowed": false
+  },
+  "-979951147": {
+    "name": "Jerry Can Guitar",
+    "allowed": false
+  },
+  "-97459906": {
+    "name": "Jumpsuit",
+    "allowed": false
+  },
+  "-1330640246": {
+    "name": "Junkyard Drum Kit",
+    "allowed": false
+  },
+  "-850982208": {
+    "name": "Key Lock",
+    "allowed": false
+  },
+  "-778367295": {
+    "name": "L96 Rifle",
+    "allowed": false
+  },
+  "-845557339": {
+    "name": "Landscape Picture Frame",
+    "allowed": false
+  },
+  "-907422733": {
+    "name": "Large Backpack",
+    "allowed": false
+  },
+  "-489848205": {
+    "name": "Large Candle Set",
+    "allowed": false
+  },
+  "-1693832478": {
+    "name": "Large Flatbed Vehicle Module",
+    "allowed": false
+  },
+  "-1992717673": {
+    "name": "Large Furnace",
+    "allowed": false
+  },
+  "-1100168350": {
+    "name": "Large Water Catcher",
+    "allowed": false
+  },
+  "-798293154": {
+    "name": "Laser Detector",
+    "allowed": false
+  },
+  "-134959124": {
+    "name": "Light Frankenstein Head",
+    "allowed": false
+  },
+  "-1624770297": {
+    "name": "Light Frankenstein Torso",
+    "allowed": false
+  },
+  "-110921842": {
+    "name": "Locker",
+    "allowed": false
+  },
+  "-1469578201": {
+    "name": "Longsword",
+    "allowed": false
+  },
+  "-946369541": {
+    "name": "Low Grade Fuel",
+    "allowed": false
+  },
+  "-89874794": {
+    "name": "Low Quality Spark Plugs",
+    "allowed": false
+  },
+  "-1812555177": {
+    "name": "LR-300 Assault Rifle",
+    "allowed": false
+  },
+  "-763071910": {
+    "name": "Lumberjack Hoodie",
+    "allowed": false
+  },
+  "-2069578888": {
+    "name": "M249",
+    "allowed": false
+  },
+  "-852563019": {
+    "name": "M92 Pistol",
+    "allowed": false
+  },
+  "-1966748496": {
+    "name": "Mace",
+    "allowed": false
+  },
+  "-1137865085": {
+    "name": "Machete",
+    "allowed": false
+  },
+  "-586784898": {
+    "name": "Mail Box",
+    "allowed": false
+  },
+  "-1732475823": {
+    "name": "Medium Frankenstein Head",
+    "allowed": false
+  },
+  "-1423304443": {
+    "name": "Medium Neon Sign",
+    "allowed": false
+  },
+  "-493159321": {
+    "name": "Medium Quality Spark Plugs",
+    "allowed": false
+  },
+  "-1819233322": {
+    "name": "Medium Wooden Sign",
+    "allowed": false
+  },
+  "-583379016": {
+    "name": "Megaphone",
+    "allowed": false
+  },
+  "-746647361": {
+    "name": "Memory Cell",
+    "allowed": false
+  },
+  "-194953424": {
+    "name": "Metal Facemask",
+    "allowed": false
+  },
+  "-1199897169": {
+    "name": "Metal horizontal embrasure",
+    "allowed": false
+  },
+  "-148229307": {
+    "name": "Metal Shop Front",
+    "allowed": false
+  },
+  "-1021495308": {
+    "name": "Metal Spring",
+    "allowed": false
+  },
+  "-1199897172": {
+    "name": "Metal Vertical embrasure",
+    "allowed": false
+  },
+  "-819720157": {
+    "name": "Metal Window Bars",
+    "allowed": false
+  },
+  "-1539025626": {
+    "name": "Miners Hat",
+    "allowed": false
+  },
+  "-1843426638": {
+    "name": "MLRS Rocket",
+    "allowed": false
+  },
+  "-20045316": {
+    "name": "Mobile Phone",
+    "allowed": false
+  },
+  "-2047081330": {
+    "name": "Movember Moustache",
+    "allowed": false
+  },
+  "-1123473824": {
+    "name": "Multiple Grenade Launcher",
+    "allowed": false
+  },
+  "-1405508498": {
+    "name": "Muzzle Boost",
+    "allowed": false
+  },
+  "-2097376851": {
+    "name": "Nailgun Nails",
+    "allowed": false
+  },
+  "-961457160": {
+    "name": "New Year Gong",
+    "allowed": false
+  },
+  "-1518883088": {
+    "name": "Night Vision Goggles",
+    "allowed": false
+  },
+  "-1506417026": {
+    "name": "Ninja Suit",
+    "allowed": false
+  },
+  "-1832422579": {
+    "name": "One Sided Town Sign Post",
+    "allowed": false
+  },
+  "-1286302544": {
+    "name": "OR Switch",
+    "allowed": false
+  },
+  "-7270019": {
+    "name": "Orange Boomer",
+    "allowed": false
+  },
+  "-733625651": {
+    "name": "Paddling Pool",
+    "allowed": false
+  },
+  "-2040817543": {
+    "name": "Pan Flute",
+    "allowed": false
+  },
+  "-1779183908": {
+    "name": "Paper",
+    "allowed": false
+  },
+  "-379734527": {
+    "name": "Pattern Boomer",
+    "allowed": false
+  },
+  "-1302129395": {
+    "name": "Pickaxe",
+    "allowed": false
+  },
+  "-1442496789": {
+    "name": "Pinata",
+    "allowed": false
+  },
+  "-144513264": {
+    "name": "Pipe Tool",
+    "allowed": false
+  },
+  "-1370759135": {
+    "name": "Portrait Picture Frame",
+    "allowed": false
+  },
+  "-365097295": {
+    "name": "Powered Water Purifier",
+    "allowed": false
+  },
+  "-2049214035": {
+    "name": "Pressure Pad",
+    "allowed": false
+  },
+  "-956706906": {
+    "name": "Prison Cell Gate",
+    "allowed": false
+  },
+  "-1429456799": {
+    "name": "Prison Cell Wall",
+    "allowed": false
+  },
+  "-892718768": {
+    "name": "Prisoner Hood",
+    "allowed": false
+  },
+  "-986782031": {
+    "name": "Rabbit Mask",
+    "allowed": false
+  },
+  "-1736356576": {
+    "name": "Reactive Target",
+    "allowed": false
+  },
+  "-1553999294": {
+    "name": "Red Boomer",
+    "allowed": false
+  },
+  "-1160621614": {
+    "name": "Red Industrial Wall Light",
+    "allowed": false
+  },
+  "-1486461488": {
+    "name": "Red Roman Candle",
+    "allowed": false
+  },
+  "-454370658": {
+    "name": "Red Volcano Firework",
+    "allowed": false
+  },
+  "-324675402": {
+    "name": "Reindeer Antlers",
+    "allowed": false
+  },
+  "-1861522751": {
+    "name": "Research Table",
+    "allowed": false
+  },
+  "-1044468317": {
+    "name": "RF Broadcaster",
+    "allowed": false
+  },
+  "-566907190": {
+    "name": "RF Pager",
+    "allowed": false
+  },
+  "-2002277461": {
+    "name": "Road Sign Jacket",
+    "allowed": false
+  },
+  "-699558439": {
+    "name": "Road Sign Gloves",
+    "allowed": false
+  },
+  "-742865266": {
+    "name": "Rocket",
+    "allowed": false
+  },
+  "-1863063690": {
+    "name": "Rocking Chair",
+    "allowed": false
+  },
+  "-458565393": {
+    "name": "Root Combiner",
+    "allowed": false
+  },
+  "-1985799200": {
+    "name": "Rug",
+    "allowed": false
+  },
+  "-1104881824": {
+    "name": "Rug Bear Skin",
+    "allowed": false
+  },
+  "-173268132": {
+    "name": "Rustigé Egg - Blue",
+    "allowed": false
+  },
+  "-173268125": {
+    "name": "Rustigé Egg - Green",
+    "allowed": false
+  },
+  "-173268126": {
+    "name": "Rustigé Egg - Ivory",
+    "allowed": false
+  },
+  "-173268131": {
+    "name": "Rustigé Egg - Purple",
+    "allowed": false
+  },
+  "-173268129": {
+    "name": "Rustigé Egg - Red",
+    "allowed": false
+  },
+  "-173268128": {
+    "name": "Rustigé Egg - White",
+    "allowed": false
+  },
+  "-262590403": {
+    "name": "Salvaged Axe",
+    "allowed": false
+  },
+  "-1978999529": {
+    "name": "Salvaged Cleaver",
+    "allowed": false
+  },
+  "-1506397857": {
+    "name": "Salvaged Hammer",
+    "allowed": false
+  },
+  "-1780802565": {
+    "name": "Salvaged Icepick",
+    "allowed": false
+  },
+  "-384243979": {
+    "name": "SAM Ammo",
+    "allowed": false
+  },
+  "-1009359066": {
+    "name": "SAM Site",
+    "allowed": false
+  },
+  "-559599960": {
+    "name": "Sandbag Barricade",
+    "allowed": false
+  },
+  "-1878475007": {
+    "name": "Satchel Charge",
+    "allowed": false
+  },
+  "-1958316066": {
+    "name": "Scientist Suit",
+    "allowed": false
+  },
+  "-948291630": {
+    "name": "Seismic Sensor",
+    "allowed": false
+  },
+  "-904863145": {
+    "name": "Semi-Automatic Rifle",
+    "allowed": false
+  },
+  "-1994909036": {
+    "name": "Sheet Metal",
+    "allowed": false
+  },
+  "-2067472972": {
+    "name": "Sheet Metal Door",
+    "allowed": false
+  },
+  "-2025184684": {
+    "name": "Shirt",
+    "allowed": false
+  },
+  "-796583652": {
+    "name": "Shop Front",
+    "allowed": false
+  },
+  "-1695367501": {
+    "name": "Shorts",
+    "allowed": false
+  },
+  "-1536855921": {
+    "name": "Shovel",
+    "allowed": false
+  },
+  "-2107018088": {
+    "name": "Shovel Bass",
+    "allowed": false
+  },
+  "-1368584029": {
+    "name": "Sickle",
+    "allowed": false
+  },
+  "-1850571427": {
+    "name": "Military Silencer",
+    "allowed": false
+  },
+  "-855748505": {
+    "name": "Simple Handmade Sight",
+    "allowed": false
+  },
+  "-282113991": {
+    "name": "Simple Light",
+    "allowed": false
+  },
+  "-2073432256": {
+    "name": "Skinning Knife",
+    "allowed": false
+  },
+  "-216116642": {
+    "name": "Skull Door Knocker",
+    "allowed": false
+  },
+  "-1073015016": {
+    "name": "Skull Spikes",
+    "allowed": false
+  },
+  "-769647921": {
+    "name": "Skull Trophy",
+    "allowed": false
+  },
+  "-333406828": {
+    "name": "Sled",
+    "allowed": false
+  },
+  "-1754948969": {
+    "name": "Sleeping Bag",
+    "allowed": false
+  },
+  "-2058362263": {
+    "name": "Small Candle Set",
+    "allowed": false
+  },
+  "-869598982": {
+    "name": "Small Hunting Trophy",
+    "allowed": false
+  },
+  "-1293296287": {
+    "name": "Small Oil Refinery",
+    "allowed": false
+  },
+  "-692338819": {
+    "name": "Small Rechargeable Battery",
+    "allowed": false
+  },
+  "-369760990": {
+    "name": "Small Stash",
+    "allowed": false
+  },
+  "-132247350": {
+    "name": "Small Water Catcher",
+    "allowed": false
+  },
+  "-1138208076": {
+    "name": "Small Wooden Sign",
+    "allowed": false
+  },
+  "-695978112": {
+    "name": "Smart Alarm",
+    "allowed": false
+  },
+  "-17123659": {
+    "name": "Smoke Rocket WIP!!!!",
+    "allowed": false
+  },
+  "-582782051": {
+    "name": "Snap Trap",
+    "allowed": false
+  },
+  "-48090175": {
+    "name": "Snow Jacket",
+    "allowed": false
+  },
+  "-842267147": {
+    "name": "Snowman Helmet",
+    "allowed": false
+  },
+  "-555122905": {
+    "name": "Sofa",
+    "allowed": false
+  },
+  "-343857907": {
+    "name": "Sound Light",
+    "allowed": false
+  },
+  "-41440462": {
+    "name": "Spas-12 Shotgun",
+    "allowed": false
+  },
+  "-1517740219": {
+    "name": "Speargun",
+    "allowed": false
+  },
+  "-1800345240": {
+    "name": "Speargun Spear",
+    "allowed": false
+  },
+  "-1100422738": {
+    "name": "Spinning Wheel",
+    "allowed": false
+  },
+  "-563624462": {
+    "name": "Splitter",
+    "allowed": false
+  },
+  "-596876839": {
+    "name": "Spray Can",
+    "allowed": false
+  },
+  "-781014061": {
+    "name": "Sprinkler",
+    "allowed": false
+  },
+  "-1331212963": {
+    "name": "Star Tree Topper",
+    "allowed": false
+  },
+  "-1535621066": {
+    "name": "Stone Fireplace",
+    "allowed": false
+  },
+  "-1583967946": {
+    "name": "Stone Hatchet",
+    "allowed": false
+  },
+  "-1049172752": {
+    "name": "Storage Adaptor",
+    "allowed": false
+  },
+  "-1421257350": {
+    "name": "Storage Barrel Horizontal",
+    "allowed": false
+  },
+  "-1614955425": {
+    "name": "Strengthened Glass Window",
+    "allowed": false
+  },
+  "-1785231475": {
+    "name": "Surgeon Scrubs",
+    "allowed": false
+  },
+  "-1108136649": {
+    "name": "Tactical Gloves",
+    "allowed": false
+  },
+  "-626174997": {
+    "name": "Taxi Vehicle Module",
+    "allowed": false
+  },
+  "-295829489": {
+    "name": "Test Generator",
+    "allowed": false
+  },
+  "-1758372725": {
+    "name": "Thompson",
+    "allowed": false
+  },
+  "-97956382": {
+    "name": "Tool Cupboard",
+    "allowed": false
+  },
+  "-1671551935": {
+    "name": "Torpedo",
+    "allowed": false
+  },
+  "-1478445584": {
+    "name": "Tuna Can Lamp",
+    "allowed": false
+  },
+  "-901370585": {
+    "name": "Twitch Rivals Trophy 2023",
+    "allowed": false
+  },
+  "-1647846966": {
+    "name": "Two Sided Ornate Hanging Sign",
+    "allowed": false
+  },
+  "-885833256": {
+    "name": "Vampire Stake",
+    "allowed": false
+  },
+  "-280223496": {
+    "name": "Violet Boomer",
+    "allowed": false
+  },
+  "-99886070": {
+    "name": "Violet Roman Candle",
+    "allowed": false
+  },
+  "-1538109120": {
+    "name": "Violet Volcano Firework",
+    "allowed": false
+  },
+  "-1501434104": {
+    "name": "Unknown Item",
+    "allowed": false
+  },
+  "-1344017968": {
+    "name": "Wanted Poster",
+    "allowed": false
+  },
+  "-463122489": {
+    "name": "Watch Tower",
+    "allowed": false
+  },
+  "-1863559151": {
+    "name": "Water Barrel",
+    "allowed": false
+  },
+  "-119235651": {
+    "name": "Water Jug",
+    "allowed": false
+  },
+  "-1815301988": {
+    "name": "Water Pistol",
+    "allowed": false
+  },
+  "-1284169891": {
+    "name": "Water Pump",
+    "allowed": false
+  },
+  "-1367281941": {
+    "name": "Waterpipe Shotgun",
+    "allowed": false
+  },
+  "-132516482": {
+    "name": "Weapon Lasersight",
+    "allowed": false
+  },
+  "-1101924344": {
+    "name": "Wetsuit",
+    "allowed": false
+  },
+  "-96256997": {
+    "name": "Wide Weapon Rack",
+    "allowed": false
+  },
+  "-1819763926": {
+    "name": "Wind Turbine",
+    "allowed": false
+  },
+  "-144417939": {
+    "name": "Wire Tool",
+    "allowed": false
+  },
+  "-1478212975": {
+    "name": "Wolf Headdress",
+    "allowed": false
+  },
+  "-2094954543": {
+    "name": "Wood Armor Helmet",
+    "allowed": false
+  },
+  "-1336109173": {
+    "name": "Wood Double Door",
+    "allowed": false
+  },
+  "-1023374709": {
+    "name": "Wood Shutters",
+    "allowed": false
+  },
+  "-180129657": {
+    "name": "Wood Storage Box",
+    "allowed": false
+  },
+  "-1234735557": {
+    "name": "Wooden Arrow",
+    "allowed": false
+  },
+  "-92759291": {
+    "name": "Wooden Floor Spikes",
+    "allowed": false
+  },
+  "-1151332840": {
+    "name": "Wooden Frontier Bar Doors",
+    "allowed": false
+  },
+  "-316250604": {
+    "name": "Wooden Ladder",
+    "allowed": false
+  },
+  "-1183726687": {
+    "name": "Wooden Window Bars",
+    "allowed": false
+  },
+  "-41896755": {
+    "name": "Workbench Level 2",
+    "allowed": false
+  },
+  "-1607980696": {
+    "name": "Workbench Level 3",
+    "allowed": false
+  },
+  "-996185386": {
+    "name": "XL Picture Frame",
+    "allowed": false
+  },
+  "-211235948": {
+    "name": "Xylobone",
+    "allowed": false
+  }
+}

@@ -788,5 +788,6 @@
     "youAreAlreadyLeader": "Už jsi vůdce.",
     "youAreNotPairedWithServer": "Příkaz na vůdce nefunguje, protože nejsi spárován se serverem.",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy"
+    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
+    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy"
 }
