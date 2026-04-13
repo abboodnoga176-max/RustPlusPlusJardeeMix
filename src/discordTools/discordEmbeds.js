@@ -890,27 +890,47 @@ module.exports = {
         });
     },
 
-    getUpdateBattlemetricsOnlinePlayersInformationEmbed: function (rustplus, battlemetricsId) {
+    getUpdateBattlemetricsOnlinePlayersInformationEmbeds: function (rustplus, battlemetricsId) {
         const bmInstance = Client.client.battlemetricsInstances[battlemetricsId];
         const guildId = rustplus.guildId;
 
         const playerIds = bmInstance.getOnlinePlayerIdsOrderedByTime();
+        const embeds = [];
 
-        let totalCharacters = 0;
+        const baseTitle = Client.client.intlGet(guildId, 'battlemetricsOnlinePlayers');
+        const footer = { text: bmInstance.server_name };
+        const playersTitleLength = `${Client.client.intlGet(guildId, 'players')}`.length;
+
+        let totalCharacters = baseTitle.length + bmInstance.server_name.length + playersTitleLength;
         let fieldCharacters = 0;
 
-        const title = Client.client.intlGet(guildId, 'battlemetricsOnlinePlayers');
-        const footer = { text: bmInstance.server_name };
-
-        totalCharacters += title.length;
-        totalCharacters += bmInstance.server_name.length;
-        totalCharacters += Client.client.intlGet(guildId, 'andMorePlayers', { number: 100 }).length;
-        totalCharacters += `${Client.client.intlGet(guildId, 'players')}`.length;
-
-        const fields = [''];
+        let fields = [''];
         let fieldIndex = 0;
-        let isEmbedFull = false;
         let playerCounter = 0;
+
+        const createEmbed = (fieldsArray, index, isLast) => {
+            const title = index === 0 ? baseTitle : `${baseTitle} (${index + 1})`;
+            const embed = module.exports.getEmbed({
+                title: title,
+                color: Constants.COLOR_DEFAULT,
+                footer: isLast ? footer : undefined,
+                timestamp: isLast
+            });
+
+            let fieldCounter = 0;
+            for (const field of fieldsArray) {
+                embed.addFields({
+                    name: fieldCounter === 0 ? Client.client.intlGet(guildId, 'players') : '\u200B',
+                    value: field === '' ? '\u200B' : field,
+                    inline: true
+                });
+                fieldCounter += 1;
+            }
+            return embed;
+        };
+
+        let embedIndex = 0;
+
         for (const playerId of playerIds) {
             playerCounter += 1;
 
@@ -929,8 +949,14 @@ module.exports = {
             playerStr += `[${name}](${Constants.BATTLEMETRICS_PROFILE_URL + `${playerId}`})\n`;
 
             if (totalCharacters + playerStr.length >= Constants.EMBED_MAX_TOTAL_CHARACTERS) {
-                isEmbedFull = true;
-                break;
+                embeds.push(createEmbed(fields, embedIndex, false));
+                embedIndex++;
+
+                // Reset for the next embed
+                fields = [''];
+                fieldIndex = 0;
+                totalCharacters = baseTitle.length + (embedIndex.toString().length + 4) + playersTitleLength;
+                fieldCharacters = 0;
             }
 
             if (fieldCharacters + playerStr.length >= Constants.EMBED_MAX_FIELD_VALUE_CHARACTERS) {
@@ -944,30 +970,10 @@ module.exports = {
             fieldCharacters += playerStr.length;
         }
 
-        const embed = module.exports.getEmbed({
-            title: title,
-            color: Constants.COLOR_DEFAULT,
-            footer: footer,
-            timestamp: true
-        });
+        // Add the last embed
+        embeds.push(createEmbed(fields, embedIndex, true));
 
-        if (isEmbedFull) {
-            embed.setDescription(Client.client.intlGet(guildId, 'andMorePlayers', {
-                number: playerIds.length - playerCounter
-            }));
-        }
-
-        let fieldCounter = 0;
-        for (const field of fields) {
-            embed.addFields({
-                name: fieldCounter === 0 ? Client.client.intlGet(guildId, 'players') : '\u200B',
-                value: field === '' ? '\u200B' : field,
-                inline: true
-            });
-            fieldCounter += 1;
-        }
-
-        return embed;
+        return embeds;
     },
 
     getDiscordCommandResponseEmbed: function (rustplus, response) {
