@@ -789,5 +789,6 @@
     "youAreNotPairedWithServer": "Leader command does not work because you're not paired with the server.",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
     "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy"
+    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
+    "discordTeamNotificationsSetting": "Discord teammate notifications."
 }

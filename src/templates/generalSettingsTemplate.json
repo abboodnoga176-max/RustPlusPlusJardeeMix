@@ -22,5 +22,8 @@
     "battlemetricsTrackerNameChanges": true,
     "battlemetricsGlobalNameChanges": false,
     "battlemetricsGlobalLogin": false,
-    "battlemetricsGlobalLogout": false
+    "battlemetricsGlobalLogout": false,
+    "discordConnectionNotify": true,
+    "discordAfkNotify": false,
+    "discordDeathNotify": true
 }

@@ -789,5 +789,6 @@
     "youAreNotPairedWithServer": "서버와 페어링되지 않았기 때문에 리더 명령어가 작동하지 않습니다.",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
     "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy"
+    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
+    "discordTeamNotificationsSetting": "Discord 팀 동료 알림"
 }

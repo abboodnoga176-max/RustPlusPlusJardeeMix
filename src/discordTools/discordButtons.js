@@ -390,6 +390,27 @@ module.exports = {
             }));
     },
 
+    getDiscordTeammateNotificationsButtons: function (guildId) {
+        const instance = Client.client.getInstance(guildId);
+
+        return new Discord.ActionRowBuilder().addComponents(
+            module.exports.getButton({
+                customId: 'DiscordTeammateConnection',
+                label: Client.client.intlGet(guildId, 'connectionsCap'),
+                style: instance.generalSettings.discordConnectionNotify ? SUCCESS : DANGER
+            }),
+            module.exports.getButton({
+                customId: 'DiscordTeammateAfk',
+                label: Client.client.intlGet(guildId, 'afkCap'),
+                style: instance.generalSettings.discordAfkNotify ? SUCCESS : DANGER
+            }),
+            module.exports.getButton({
+                customId: 'DiscordTeammateDeath',
+                label: Client.client.intlGet(guildId, 'deathCap'),
+                style: instance.generalSettings.discordDeathNotify ? SUCCESS : DANGER
+            }));
+    },
+
     getLeaderCommandEnabledButton: function (guildId, enabled) {
         return new Discord.ActionRowBuilder().addComponents(
             module.exports.getButton({
