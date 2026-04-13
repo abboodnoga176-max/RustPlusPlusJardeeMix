@@ -178,6 +178,51 @@ module.exports = async (client, interaction) => {
             components: [DiscordButtons.getInGameTeammateNotificationsButtons(guildId)]
         });
     }
+    else if (interaction.customId === 'DiscordTeammateConnection') {
+        instance.generalSettings.discordConnectionNotify = !instance.generalSettings.discordConnectionNotify;
+        client.setInstance(guildId, instance);
+
+        if (rustplus) rustplus.generalSettings.discordConnectionNotify = instance.generalSettings.discordConnectionNotify;
+
+        client.log(client.intlGet(null, 'infoCap'), client.intlGet(null, 'buttonValueChange', {
+            id: `${verifyId}`,
+            value: `${instance.generalSettings.discordConnectionNotify}`
+        }));
+
+        await client.interactionUpdate(interaction, {
+            components: [DiscordButtons.getDiscordTeammateNotificationsButtons(guildId)]
+        });
+    }
+    else if (interaction.customId === 'DiscordTeammateAfk') {
+        instance.generalSettings.discordAfkNotify = !instance.generalSettings.discordAfkNotify;
+        client.setInstance(guildId, instance);
+
+        if (rustplus) rustplus.generalSettings.discordAfkNotify = instance.generalSettings.discordAfkNotify;
+
+        client.log(client.intlGet(null, 'infoCap'), client.intlGet(null, 'buttonValueChange', {
+            id: `${verifyId}`,
+            value: `${instance.generalSettings.discordAfkNotify}`
+        }));
+
+        await client.interactionUpdate(interaction, {
+            components: [DiscordButtons.getDiscordTeammateNotificationsButtons(guildId)]
+        });
+    }
+    else if (interaction.customId === 'DiscordTeammateDeath') {
+        instance.generalSettings.discordDeathNotify = !instance.generalSettings.discordDeathNotify;
+        client.setInstance(guildId, instance);
+
+        if (rustplus) rustplus.generalSettings.discordDeathNotify = instance.generalSettings.discordDeathNotify;
+
+        client.log(client.intlGet(null, 'infoCap'), client.intlGet(null, 'buttonValueChange', {
+            id: `${verifyId}`,
+            value: `${instance.generalSettings.discordDeathNotify}`
+        }));
+
+        await client.interactionUpdate(interaction, {
+            components: [DiscordButtons.getDiscordTeammateNotificationsButtons(guildId)]
+        });
+    }
     else if (interaction.customId === 'FcmAlarmNotification') {
         instance.generalSettings.fcmAlarmNotificationEnabled = !instance.generalSettings.fcmAlarmNotificationEnabled;
         client.setInstance(guildId, instance);
