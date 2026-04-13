@@ -38,6 +38,7 @@ const Map = require('../util/map.js');
 const RustPlusLite = require('../structures/RustPlusLite');
 const TeamHandler = require('../handlers/teamHandler.js');
 const Timer = require('../util/timer.js');
+const tradeUtils = require('../util/tradeUtils.js');
 
 const TOKENS_LIMIT = 24;        /* Per player */
 const TOKENS_REPLENISH = 3;     /* Per second */
@@ -2718,6 +2719,59 @@ class RustPlus extends RustPlusLib {
         string += `${Client.client.intlGet(this.guildId, 'server')}: ${uptimeServer}.`;
 
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+
+    getCommandWtb(command) {
+        const prefix = this.generalSettings.prefix;
+        const commandWtb = `${prefix}${Client.client.intlGet(this.guildId, 'commandSyntaxWtb')}`;
+        const commandWtbEn = `${prefix}${Client.client.intlGet('en', 'commandSyntaxWtb')}`;
+
+        if (command.toLowerCase().startsWith(`${commandWtb} `)) {
+            command = command.slice(`${commandWtb} `.length).trim();
+        }
+        else {
+            command = command.slice(`${commandWtbEn} `.length).trim();
+        }
+
+        const words = command.split(' ');
+        const lastWord = words[words.length - 1];
+        const lastWordLength = lastWord.length;
+        const restString = command.slice(0, -(lastWordLength)).trim();
+
+        let itemSearchName = null, itemSearchQuantity = null;
+        if (isNaN(lastWord)) {
+            itemSearchName = command;
+            itemSearchQuantity = 1;
+        } else {
+            itemSearchName = restString;
+            itemSearchQuantity = parseInt(lastWord);
+        }
+
+        const result = tradeUtils.getBestTradeRoutes(Client.client, this.guildId, this, itemSearchName, itemSearchQuantity, false);
+
+        if (result.error) {
+            return result.error;
+        }
+
+        const formattedLines = result.formattedLines;
+        if (formattedLines.length === 0) {
+            return Client.client.intlGet(this.guildId, 'noItemFound') || 'No trades found...';
+        }
+
+        let strings = [];
+        let string = ``;
+        for (const line of formattedLines) {
+            if (string.length + line.length + 1 > 256) {
+                strings.push(string);
+                string = `${line}\n`;
+            } else {
+                string += `${line}\n`;
+            }
+        }
+        if (string.length > 0) strings.push(string);
+
+        return strings;
     }
 
     getCommandWipe(isInfoChannel = false) {

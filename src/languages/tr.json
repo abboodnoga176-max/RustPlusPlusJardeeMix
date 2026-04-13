@@ -168,6 +168,7 @@
     "commandSyntaxUptime": "uptime",
     "commandSyntaxWipe": "wipe",
     "commandSyntaxWood": "wood",
+    "commandSyntaxWtb": "wtb",
     "commandsAlarmDesc": "Akıllı Alarm işlemleri.",
     "commandsAlarmEditDesc": "Akıllı Alarm açıklamasını düzenle.",
     "commandsAlarmEditIdDesc": "Akıllı Alarm Kimliği.",
