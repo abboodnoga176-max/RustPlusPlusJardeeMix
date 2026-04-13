@@ -168,6 +168,7 @@
     "commandSyntaxUptime": "uptime",
     "commandSyntaxWipe": "wipe",
     "commandSyntaxWood": "wood",
+    "commandSyntaxWtb": "wtb",
     "commandsAlarmDesc": "Operace s chytrými alarmy.",
     "commandsAlarmEditDesc": "Upravit popis chytrého alarmu.",
     "commandsAlarmEditIdDesc": "ID chytrého alarmu.",

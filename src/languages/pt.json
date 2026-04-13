@@ -168,6 +168,7 @@
     "commandSyntaxUptime": "uptime",
     "commandSyntaxWipe": "wipe",
     "commandSyntaxWood": "wood",
+    "commandSyntaxWtb": "wtb",
     "commandsAlarmDesc": "Operações nos Alarmes Inteligentes.",
     "commandsAlarmEditDesc": "Editar as propriedades de um Alarme Inteligente.",
     "commandsAlarmEditIdDesc": "O ID do Alarme Inteligente.",

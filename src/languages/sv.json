@@ -168,6 +168,7 @@
     "commandSyntaxUptime": "uptime",
     "commandSyntaxWipe": "wipe",
     "commandSyntaxWood": "wood",
+    "commandSyntaxWtb": "wtb",
     "commandsAlarmDesc": "Operationer på Smarta Larm.",
     "commandsAlarmEditDesc": "Redigera egenskaperna för ett Smart Larm.",
     "commandsAlarmEditIdDesc": "ID:t för det Smarta Larmet.",
