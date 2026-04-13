@@ -484,15 +484,35 @@ module.exports = {
     sendUpdateBattlemetricsOnlinePlayersInformationMessage: async function (rustplus, battlemetricsId) {
         const instance = Client.client.getInstance(rustplus.guildId);
 
-        const content = {
-            embeds: [DiscordEmbeds.getUpdateBattlemetricsOnlinePlayersInformationEmbed(rustplus, battlemetricsId)]
+        const embeds = DiscordEmbeds.getUpdateBattlemetricsOnlinePlayersInformationEmbeds(rustplus, battlemetricsId);
+        const newMessageIds = [];
+        let updated = false;
+
+        for (let i = 0; i < embeds.length; i++) {
+            const content = { embeds: [embeds[i]] };
+            const messageId = instance.informationMessageId.battlemetricsPlayers.length > i ?
+                instance.informationMessageId.battlemetricsPlayers[i] : null;
+
+            const message = await module.exports.sendMessage(rustplus.guildId, content,
+                messageId, instance.channelId.information);
+
+            if (message && message.id) {
+                newMessageIds.push(message.id);
+                if (messageId !== message.id) updated = true;
+            }
         }
 
-        const message = await module.exports.sendMessage(rustplus.guildId, content,
-            instance.informationMessageId.battlemetricsPlayers, instance.channelId.information);
+        // Delete any extra messages
+        if (instance.informationMessageId.battlemetricsPlayers.length > embeds.length) {
+            for (let i = embeds.length; i < instance.informationMessageId.battlemetricsPlayers.length; i++) {
+                await DiscordTools.deleteMessageById(rustplus.guildId, instance.channelId.information,
+                    instance.informationMessageId.battlemetricsPlayers[i]);
+            }
+            updated = true;
+        }
 
-        if (message.id !== instance.informationMessageId.battlemetricsPlayers) {
-            instance.informationMessageId.battlemetricsPlayers = message.id;
+        if (updated || instance.informationMessageId.battlemetricsPlayers.length !== newMessageIds.length) {
+            instance.informationMessageId.battlemetricsPlayers = newMessageIds;
             Client.client.setInstance(rustplus.guildId, instance);
         }
     },
