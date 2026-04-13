@@ -334,6 +334,10 @@ module.exports = async (client, interaction) => {
             steamId = id;
             name = await Scrape.scrapeSteamProfileName(client, id);
 
+            if (name) {
+                name = (tracker.clanTag !== '' ? `${tracker.clanTag} ` : '') + `${name}`;
+            }
+
             if (name && bmInstance) {
                 playerId = Object.keys(bmInstance.players).find(e => bmInstance.players[e]['name'] === name);
                 if (!playerId) playerId = null;
