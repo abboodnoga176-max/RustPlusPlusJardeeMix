@@ -77,6 +77,10 @@ module.exports = {
         BattlemetricsHandler.handler(client, true);
         client.battlemetricsIntervalId = setInterval(BattlemetricsHandler.handler, 60000, client, false);
 
+        client.crossServerStatus = new Object();
+        client.crossServerIndex = 0;
+        client.crossServerIntervalId = setInterval(require('../handlers/crossServerHandler').handler, 10000, client);
+
         client.createRustplusInstancesFromConfig();
     },
 };

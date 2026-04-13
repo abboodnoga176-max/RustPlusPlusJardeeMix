@@ -1,34 +1,17 @@
-1. **Add new language strings for Discord mute commands:**
-   - In all `src/languages/*.json` files, add:
-     - `"commandSyntaxMuteDiscord": "mutediscord"`
-     - `"commandSyntaxUnmuteDiscord": "unmutediscord"`
-     - `"inGameDiscordMuted": "Discord muted."`
-     - `"inGameDiscordUnmuted": "Discord unmuted."`
-     - `"discordMuted": "You muted the voice channel."`
-     - `"discordUnmuted": "You unmuted the voice channel."`
-     - `"discordMuteNoVoiceChannel": "You are not in a voice channel."`
-     - `"discordMuteNotAuthorized": "You are not authorized to use discord mute commands."`
-     - `"commandsMutediscordDesc": "Commands to manage Discord Voice channel muting."`
-     - `"commandsMutediscordAuthorizeDesc": "Authorize a user to mute/unmute discord from in-game."`
-     - `"commandsMutediscordDeauthorizeDesc": "Deauthorize a user from muting/unmuting discord from in-game."`
-     - `"commandsMutediscordDiscordUserDesc": "The Discord User."`
-     - `"commandsMutediscordSteamidDesc": "The Steam ID of the user."`
-     - `"commandsMutediscordShowDesc": "Show authorized users."`
+The user wants to see if an offline player on the tracked server is playing on a *different* server, and show a different icon or status if they are. They proposed checking one player every 10 seconds (so 6 players per minute) to stay well within rate limits.
 
-2. **Update `src/util/CreateInstanceFile.js` with new instance config:**
-   - Add a configuration object to manage authorized users for muting:
-     `instance.discordMuteAuthorized = { discordIds: [], steamIds: [] };`
-   - Handle migrations for existing instances to include this new property.
+This means we can queue players who are "offline" (or all players on the tracker), query their Battlemetrics profile (`https://api.battlemetrics.com/players/{playerId}?include=server`), find out if they are online on *any* server (`data.data.meta.online === true` or by parsing the included servers), and then save this state.
 
-3. **Add Discord Mute commands (`/atmu` / `/datmu` equivalent) to a new command file (`src/commands/mutediscord.js`):**
-   - Implement slash commands to `authorize`, `deauthorize`, and `show` users authorized to use the in-game `#mutediscord` and `#unmutediscord` commands.
-   - Restrict this slash command to administrators.
-
-4. **Add handling for in-game commands `#mutediscord` and `#unmutediscord`:**
-   - In `src/handlers/inGameCommandHandler.js`:
-     - Add `rustplus.getCommandMuteDiscord(callerSteamId)`
-     - Add `rustplus.getCommandUnmuteDiscord(callerSteamId)`
-   - In `src/structures/RustPlus.js`, implement `getCommandMuteDiscord` and `getCommandUnmuteDiscord`.
-     - These functions will verify if the caller is authorized (using `callerSteamId`).
-     - If authorized, they will find the voice channel the user is currently in (using Discord `client` and their linked discord account or via iterating all voice channels to find them, actually we can find all Discord users mapped to that steamId by checking if they are in the server and in a voice channel).
-     - Or a simpler way: find the discord user(s) matching the authorized steamId, find which voice channel they are in, and mute/unmute everyone else in that channel.
+Wait! A player's profile query:
+`https://api.battlemetrics.com/players/{playerId}?include=server`
+In my earlier test output:
+```json
+      "meta": {
+        "timePlayed": 225000,
+        "firstSeen": "2026-01-08T09:04:08.557Z",
+        "lastSeen": "2026-04-13T13:18:24.697Z",
+        "online": true
+      }
+```
+Wait, the `meta.online` is `true` for a specific server (in the `included` block where `type: "server"`), or `data.data.attributes`?
+Let's see what a player GET request looks like.

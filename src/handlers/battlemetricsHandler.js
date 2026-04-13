@@ -82,9 +82,11 @@ module.exports = {
 
                         name = (content.clanTag !== '' ? `${content.clanTag} ` : '') + `${name}`;
 
-                        if (player.name !== name) {
-                            await module.exports.trackerNewNameDetected(client, guildId, trackerId, battlemetricsId,
-                                player.name, name);
+                        if (player.name !== name || player.playerId === null) {
+                            if (player.name !== name) {
+                                await module.exports.trackerNewNameDetected(client, guildId, trackerId, battlemetricsId,
+                                    player.name, name);
+                            }
 
                             const newPlayerId = Object.keys(bmInstance.players)
                                 .find(e => bmInstance.players[e]['name'] === name);
@@ -99,6 +101,22 @@ module.exports = {
                         await DiscordMessages.sendTrackerMessage(guildId, trackerId);
                         continue;
                     }
+                }
+
+                let updated = false;
+                for (const player of content.players) {
+                    if (player.playerId === null && player.steamId !== null) {
+                        const newPlayerId = Object.keys(bmInstance.players)
+                            .find(e => bmInstance.players[e]['name'] === player.name);
+                        if (newPlayerId) {
+                            player.playerId = newPlayerId;
+                            updated = true;
+                        }
+                    }
+                }
+
+                if (updated) {
+                    client.setInstance(guildId, instance);
                 }
 
                 const trackerPlayerIds = content.players.map(e => e.playerId);
