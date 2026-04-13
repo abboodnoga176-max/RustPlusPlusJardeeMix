@@ -159,20 +159,22 @@ module.exports = {
                 Client.client.intlGet(guildId, 'empty') : ''}`;
             id += '\n';
 
-            if (!bmInstance.players.hasOwnProperty(player.playerId) || !successful) {
-                status += `${Constants.NOT_FOUND_EMOJI}\n`;
-            }
-            else {
-                let time = null;
-                if (bmInstance.players[player.playerId]['status']) {
-                    time = bmInstance.getOnlineTime(player.playerId);
-                    status += `${Constants.ONLINE_EMOJI}`;
-                }
-                else {
-                    time = bmInstance.getOfflineTime(player.playerId);
-                    status += `${Constants.OFFLINE_EMOJI}`;
-                }
+            let crossServerOnline = Client.client.crossServerStatus && player.playerId ? Client.client.crossServerStatus[player.playerId] : null;
+
+            if (bmInstance.players.hasOwnProperty(player.playerId) && successful && bmInstance.players[player.playerId]['status']) {
+                let time = bmInstance.getOnlineTime(player.playerId);
+                status += `${Constants.ONLINE_EMOJI}`;
                 status += time !== null ? ` [${time[1]}]\n` : '\n';
+            } else if (crossServerOnline) {
+                status += `🟡\n`;
+            } else {
+                if (!bmInstance.players.hasOwnProperty(player.playerId) || !successful) {
+                    status += `${Constants.NOT_FOUND_EMOJI}\n`;
+                } else {
+                    let time = bmInstance.getOfflineTime(player.playerId);
+                    status += `${Constants.OFFLINE_EMOJI}`;
+                    status += time !== null ? ` [${time[1]}]\n` : '\n';
+                }
             }
 
             if (isNewLine) {
