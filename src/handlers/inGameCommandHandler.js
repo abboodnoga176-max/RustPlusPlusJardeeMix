@@ -109,6 +109,14 @@ module.exports = {
             commandLowerCase.startsWith(`${prefix}${client.intlGet(guildId, 'commandSyntaxMarket')} `)) {
             rustplus.sendInGameMessage(rustplus.getCommandMarket(command));
         }
+        else if (commandLowerCase === `${prefix}${client.intlGet('en', 'commandSyntaxMuteDiscord')}` ||
+            commandLowerCase === `${prefix}${client.intlGet(guildId, 'commandSyntaxMuteDiscord')}`) {
+            rustplus.sendInGameMessage(await rustplus.getCommandMuteDiscord(callerSteamId));
+        }
+        else if (commandLowerCase === `${prefix}${client.intlGet('en', 'commandSyntaxUnmuteDiscord')}` ||
+            commandLowerCase === `${prefix}${client.intlGet(guildId, 'commandSyntaxUnmuteDiscord')}`) {
+            rustplus.sendInGameMessage(await rustplus.getCommandUnmuteDiscord(callerSteamId));
+        }
         else if (commandLowerCase === `${prefix}${client.intlGet('en', 'commandSyntaxMute')}` ||
             commandLowerCase === `${prefix}${client.intlGet(guildId, 'commandSyntaxMute')}`) {
             rustplus.sendInGameMessage(rustplus.getCommandMute());

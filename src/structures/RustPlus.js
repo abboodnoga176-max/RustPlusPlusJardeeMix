@@ -1881,6 +1881,80 @@ class RustPlus extends RustPlusLib {
         }
     }
 
+    async getCommandMuteDiscord(callerSteamId) {
+        const instance = Client.client.getInstance(this.guildId);
+
+        const mapping = instance.discordMuteMappings.find(m => m.steamId === callerSteamId);
+        if (!mapping) {
+            return Client.client.intlGet(this.guildId, 'discordMuteNotAuthorized');
+        }
+
+        const guild = Client.client.guilds.cache.get(this.guildId);
+        if (!guild) return null;
+
+        let member;
+        try {
+            member = await guild.members.fetch(mapping.discordId);
+        } catch (err) {
+            return Client.client.intlGet(this.guildId, 'discordMuteNoVoiceChannel');
+        }
+
+        if (!member || !member.voice || !member.voice.channel) {
+            return Client.client.intlGet(this.guildId, 'discordMuteNoVoiceChannel');
+        }
+
+        const voiceChannel = member.voice.channel;
+
+        for (const [id, connectedMember] of voiceChannel.members) {
+            if (id !== member.id && !connectedMember.user.bot) {
+                try {
+                    await connectedMember.voice.setMute(true, "Muted from in-game by " + callerSteamId);
+                } catch (e) {
+                    Client.client.log(Client.client.intlGet(null, 'errorCap'), `Failed to mute member ${connectedMember.id}: ${e}`);
+                }
+            }
+        }
+
+        return Client.client.intlGet(this.guildId, 'discordMutedInGame');
+    }
+
+    async getCommandUnmuteDiscord(callerSteamId) {
+        const instance = Client.client.getInstance(this.guildId);
+
+        const mapping = instance.discordMuteMappings.find(m => m.steamId === callerSteamId);
+        if (!mapping) {
+            return Client.client.intlGet(this.guildId, 'discordMuteNotAuthorized');
+        }
+
+        const guild = Client.client.guilds.cache.get(this.guildId);
+        if (!guild) return null;
+
+        let member;
+        try {
+            member = await guild.members.fetch(mapping.discordId);
+        } catch (err) {
+            return Client.client.intlGet(this.guildId, 'discordMuteNoVoiceChannel');
+        }
+
+        if (!member || !member.voice || !member.voice.channel) {
+            return Client.client.intlGet(this.guildId, 'discordMuteNoVoiceChannel');
+        }
+
+        const voiceChannel = member.voice.channel;
+
+        for (const [id, connectedMember] of voiceChannel.members) {
+            if (id !== member.id && !connectedMember.user.bot) {
+                try {
+                    await connectedMember.voice.setMute(false, "Unmuted from in-game by " + callerSteamId);
+                } catch (e) {
+                    Client.client.log(Client.client.intlGet(null, 'errorCap'), `Failed to unmute member ${connectedMember.id}: ${e}`);
+                }
+            }
+        }
+
+        return Client.client.intlGet(this.guildId, 'discordUnmutedInGame');
+    }
+
     getCommandMute() {
         const instance = Client.client.getInstance(this.guildId);
         instance.generalSettings.muteInGameBotMessages = true;
