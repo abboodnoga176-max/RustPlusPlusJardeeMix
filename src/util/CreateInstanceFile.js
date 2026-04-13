@@ -67,6 +67,7 @@ module.exports = (client, guild) => {
                 discordIds: [],
                 steamIds: []
             },
+            discordMuteMappings: [],
             aliases: []
         };
     }
@@ -189,6 +190,7 @@ module.exports = (client, guild) => {
         }
         if (!instance.blacklist.hasOwnProperty('discordIds')) instance.blacklist['discordIds'] = [];
         if (!instance.blacklist.hasOwnProperty('steamIds')) instance.blacklist['steamIds'] = [];
+        if (!instance.hasOwnProperty('discordMuteMappings')) instance.discordMuteMappings = [];
         if (!instance.hasOwnProperty('aliases')) instance.aliases = [];
 
         for (const serverId of Object.keys(instance.serverList)) {
