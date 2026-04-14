@@ -112,6 +112,22 @@ module.exports = async (client, interaction) => {
             components: [DiscordSelectMenus.getCommandDelaySelectMenu(guildId, interaction.values[0])]
         });
     }
+    else if (interaction.customId === 'CodeRaidJoinRoomSelect') {
+        const roomId = interaction.values[0];
+        const room = instance.codeRaidRooms[roomId];
+
+        if (!room) {
+            await client.interactionReply(interaction, { content: 'This room no longer exists.', ephemeral: true });
+            return;
+        }
+
+        await client.interactionReply(interaction, {
+            embeds: [require('../discordTools/discordEmbeds.js').getCodeRaidRoomEmbed(guildId, room)],
+            components: [require('../discordTools/discordButtons.js').getCodeRaidRoomButtons(roomId)],
+            ephemeral: true
+        });
+        return;
+    }
     else if (interaction.customId === 'VoiceGender') {
         instance.generalSettings.voiceGender = interaction.values[0];
         client.setInstance(guildId, instance);

@@ -367,6 +367,41 @@ module.exports = async (client, interaction) => {
 
         await DiscordMessages.sendTrackerMessage(interaction.guildId, ids.trackerId);
     }
+    else if (interaction.customId === 'CodeRaidCreateRoomModal') {
+        const roomName = interaction.fields.getTextInputValue('CodeRaidRoomName');
+        const utils = require('../util/utils.js');
+        const roomId = utils.getRandomInt(100000, 999999).toString();
+
+        instance.codeRaidRooms[roomId] = {
+            id: roomId,
+            name: roomName,
+            ownerId: interaction.user.id,
+            checkedCodes: [],
+            activeAssignments: {},
+            messageId: null
+        };
+        client.setInstance(interaction.guildId, instance);
+
+        const content = {
+            embeds: [require('../discordTools/discordEmbeds.js').getCodeRaidRoomEmbed(interaction.guildId, instance.codeRaidRooms[roomId])],
+            components: [require('../discordTools/discordButtons.js').getCodeRaidRoomButtons(roomId)]
+        };
+
+        const DiscordMessages = require('../discordTools/discordMessages.js');
+        const message = await DiscordMessages.sendMessage(interaction.guildId, content, null, instance.channelId.codeRaid);
+
+        if (message) {
+            instance.codeRaidRooms[roomId].messageId = message.id;
+            client.setInstance(interaction.guildId, instance);
+        }
+
+        await DiscordMessages.sendUpdateCodeRaidDashboardMessage(interaction.guildId);
+
+        try {
+            await interaction.deferUpdate();
+        } catch (e) {}
+        return;
+    }
     else if (interaction.customId.startsWith('TrackerRemovePlayer')) {
         const ids = JSON.parse(interaction.customId.replace('TrackerRemovePlayer', ''));
         const tracker = instance.trackers[ids.trackerId];

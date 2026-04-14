@@ -27,6 +27,27 @@ const Constants = require('../util/constants.js');
 const Languages = require('../util/languages.js');
 
 module.exports = {
+    getCodeRaidJoinRoomSelectMenu: function (guildId, rooms) {
+        const activeRooms = Object.values(rooms || {});
+        const options = [];
+
+        for (const room of activeRooms) {
+            options.push({
+                label: room.name,
+                description: `Join room ${room.name}`,
+                value: room.id.toString()
+            });
+        }
+
+        return new Discord.ActionRowBuilder().addComponents(
+            module.exports.getSelectMenu({
+                customId: 'CodeRaidJoinRoomSelect',
+                placeholder: 'Select a room to join',
+                options: options
+            })
+        );
+    },
+
     getSelectMenu: function (options = {}) {
         const selectMenu = new Discord.StringSelectMenuBuilder();
 

@@ -44,14 +44,16 @@ module.exports = (client, guild) => {
                 alarms: null,
                 storageMonitors: null,
                 activity: null,
-                trackers: null
+                trackers: null,
+                codeRaid: null
             },
             informationMessageId: {
                 map: null,
                 server: null,
                 event: null,
                 team: null,
-                battlemetricsPlayers: []
+                battlemetricsPlayers: [],
+                codeRaidDashboard: null
             },
             activeServer: null,
             serverList: {},
@@ -192,6 +194,9 @@ module.exports = (client, guild) => {
         if (!instance.blacklist.hasOwnProperty('steamIds')) instance.blacklist['steamIds'] = [];
         if (!instance.hasOwnProperty('discordMuteMappings')) instance.discordMuteMappings = [];
         if (!instance.hasOwnProperty('aliases')) instance.aliases = [];
+        if (!instance.hasOwnProperty('codeRaidRooms')) instance.codeRaidRooms = {};
+        if (!instance.channelId.hasOwnProperty('codeRaid')) instance.channelId.codeRaid = null;
+        if (!instance.informationMessageId.hasOwnProperty('codeRaidDashboard')) instance.informationMessageId.codeRaidDashboard = null;
 
         for (const serverId of Object.keys(instance.serverList)) {
             if (!Object.keys(instance.serverListLite).includes(serverId)) {

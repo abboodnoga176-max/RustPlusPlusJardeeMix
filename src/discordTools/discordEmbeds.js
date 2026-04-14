@@ -1051,6 +1051,52 @@ module.exports = {
         });
     },
 
+    getCodeRaidDashboardEmbed: function (guildId, rooms) {
+        const activeRooms = Object.values(rooms || {});
+
+        let description = `**Code Raiding Dashboard**\n\n`;
+        if (activeRooms.length === 0) {
+            description += `There are currently no active code raiding rooms.\nCreate one to start!`;
+        } else {
+            description += `**Active Rooms (${activeRooms.length}/5):**\n`;
+            for (const room of activeRooms) {
+                const checkedCount = room.checkedCodes ? room.checkedCodes.length : 0;
+                const progress = ((checkedCount / 10000) * 100).toFixed(2);
+                description += `- **${room.name}** (Progress: ${progress}% - ${checkedCount}/10000 checked)\n`;
+            }
+        }
+
+        return module.exports.getEmbed({
+            title: 'Code Raiding',
+            color: Constants.COLOR_DEFAULT,
+            description: description,
+            footer: 'RustPlusPlus Code Raiding'
+        });
+    },
+
+    getCodeRaidRoomEmbed: function (guildId, room) {
+        const checkedCount = room.checkedCodes ? room.checkedCodes.length : 0;
+        const remaining = 10000 - checkedCount;
+        const probability = ((checkedCount / 10000) * 100).toFixed(2);
+
+        const activeRaidersCount = new Set(Object.values(room.activeAssignments || {})).size;
+
+        let description = `**Room Name:** ${room.name}\n\n`;
+        description += `**Codes Remaining:** ${remaining}\n`;
+        description += `**Active Raiders:** ${activeRaidersCount}\n`;
+        description += `**Estimated Success Probability:** ${probability}%\n\n`;
+        description += `Click **[Get Next Code]** to receive a code to check.\n`;
+        description += `Click **[Code Failed]** if the code you tried did not work.\n`;
+        description += `Click **[Leave Room]** to return your unfailed code to the pool.`;
+
+        return module.exports.getEmbed({
+            title: `Code Raid Room`,
+            color: Constants.COLOR_DEFAULT,
+            description: description,
+            footer: 'RustPlusPlus Code Raiding'
+        });
+    },
+
     getHelpEmbed: function (guildId) {
         const repository = 'https://github.com/alexemanuelol/rustplusplus';
         const credentials = `${repository}/blob/master/docs/credentials.md`;
