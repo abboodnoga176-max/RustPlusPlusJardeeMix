@@ -1086,6 +1086,30 @@ module.exports = {
         });
     },
 
+    getWipecheckEmbed: function (guildId, teamStats) {
+        const title = Client.client.intlGet(guildId, 'wipecheckTitle');
+        const embed = module.exports.getEmbed({
+            color: Constants.COLOR_DEFAULT,
+            timestamp: true,
+            title: title
+        });
+
+        let description = '';
+        for (const stat of teamStats) {
+            let status = '';
+            status += stat.isAfk ? Constants.AFK_EMOJI : Constants.ONLINE_EMOJI;
+            status += stat.isAlive ? (stat.isAfk ? Constants.SLEEPING_EMOJI : Constants.ALIVE_EMOJI) : Constants.DEAD_EMOJI;
+
+            description += `**${status} ${stat.name}**\n`;
+            description += `> **${Client.client.intlGet(guildId, 'wipecheckDeaths')}**: \`${stat.deaths}\`\n`;
+            description += `> **${Client.client.intlGet(guildId, 'wipecheckPlaytime')}**: \`${stat.playTime}\`\n`;
+            description += `> **${Client.client.intlGet(guildId, 'wipecheckAfk')}**: \`${stat.afkTime}\`\n\n`;
+        }
+
+        embed.setDescription(description);
+        return embed;
+    },
+
     getUptimeEmbed: function (guildId, uptime) {
         return module.exports.getEmbed({
             color: Constants.COLOR_DEFAULT,

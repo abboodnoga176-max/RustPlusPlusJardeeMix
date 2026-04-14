@@ -565,6 +565,15 @@ module.exports = {
         await Client.client.interactionReply(interaction, content);
     },
 
+    sendWipecheckMessage: async function (interaction, teamStats) {
+        const content = {
+            embeds: [DiscordEmbeds.getWipecheckEmbed(interaction.guildId, teamStats)],
+            ephemeral: true
+        }
+
+        await Client.client.interactionEditReply(interaction, content);
+    },
+
     sendUptimeMessage: async function (interaction, uptime) {
         const content = {
             embeds: [DiscordEmbeds.getUptimeEmbed(interaction.guildId, uptime)],
