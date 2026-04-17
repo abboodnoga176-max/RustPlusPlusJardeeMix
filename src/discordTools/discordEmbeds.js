@@ -972,8 +972,28 @@ module.exports = {
             fieldCharacters += playerStr.length;
         }
 
-        // Add the last embed
-        embeds.push(createEmbed(fields, embedIndex, true));
+        // Pad the embeds to always provide enough to avoid Discord spam when count goes up/down
+        // The array will only change length if server max size changes, avoiding frequent message send/delete.
+        let maxPlayers = bmInstance.server_maxPlayers;
+        if (maxPlayers === null || maxPlayers < 100) maxPlayers = 100;
+
+        // Assuming ~60 players per embed safely
+        const expectedEmbeds = Math.ceil(maxPlayers / 60);
+        const actualExpectedEmbeds = Math.min(expectedEmbeds, 16); // max 16 embeds as per 1000 players limit
+
+        // Add the last populated embed
+        if (fields.length > 1 || fields[0] !== '') {
+            embeds.push(createEmbed(fields, embedIndex, embeds.length + 1 >= actualExpectedEmbeds));
+        } else if (embedIndex === 0) {
+            // No players, create single empty embed
+            embeds.push(createEmbed(fields, embedIndex, embeds.length + 1 >= actualExpectedEmbeds));
+        }
+
+        while (embeds.length < actualExpectedEmbeds) {
+            embedIndex++;
+            const isLast = embeds.length + 1 >= actualExpectedEmbeds;
+            embeds.push(createEmbed([''], embedIndex, isLast));
+        }
 
         return embeds;
     },

@@ -485,11 +485,18 @@ module.exports = {
         const instance = Client.client.getInstance(rustplus.guildId);
 
         const embeds = DiscordEmbeds.getUpdateBattlemetricsOnlinePlayersInformationEmbeds(rustplus, battlemetricsId);
+
+        // Chunk embeds into messages of max 10 embeds each to respect Discord API limits
+        const embedsChunks = [];
+        for (let i = 0; i < embeds.length; i += 10) {
+            embedsChunks.push(embeds.slice(i, i + 10));
+        }
+
         const newMessageIds = [];
         let updated = false;
 
-        for (let i = 0; i < embeds.length; i++) {
-            const content = { embeds: [embeds[i]] };
+        for (let i = 0; i < embedsChunks.length; i++) {
+            const content = { embeds: embedsChunks[i] };
             const messageId = instance.informationMessageId.battlemetricsPlayers.length > i ?
                 instance.informationMessageId.battlemetricsPlayers[i] : null;
 
@@ -503,8 +510,8 @@ module.exports = {
         }
 
         // Delete any extra messages
-        if (instance.informationMessageId.battlemetricsPlayers.length > embeds.length) {
-            for (let i = embeds.length; i < instance.informationMessageId.battlemetricsPlayers.length; i++) {
+        if (instance.informationMessageId.battlemetricsPlayers.length > embedsChunks.length) {
+            for (let i = embedsChunks.length; i < instance.informationMessageId.battlemetricsPlayers.length; i++) {
                 await DiscordTools.deleteMessageById(rustplus.guildId, instance.channelId.information,
                     instance.informationMessageId.battlemetricsPlayers[i]);
             }
