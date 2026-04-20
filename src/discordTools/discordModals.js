@@ -322,6 +322,26 @@ module.exports = {
         return modal;
     },
 
+    getCreateCodeRaidRoomModal(guildId) {
+        const modal = module.exports.getModal({
+            customId: 'CodeRaidCreateRoomModal',
+            title: 'Create Code Raid Room'
+        });
+
+        modal.addComponents(
+            new Discord.ActionRowBuilder().addComponents(TextInput.getTextInput({
+                customId: 'CodeRaidRoomName',
+                label: 'Room Name',
+                style: Discord.TextInputStyle.Short,
+                required: true,
+                minLength: 1,
+                maxLength: 32
+            }))
+        );
+
+        return modal;
+    },
+
     getTrackerRemovePlayerModal(guildId, trackerId) {
         const instance = Client.client.getInstance(guildId);
         const tracker = instance.trackers[trackerId];

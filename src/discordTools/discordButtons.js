@@ -519,6 +519,52 @@ module.exports = {
             }));
     },
 
+    getCodeRaidDashboardButtons: function () {
+        return new Discord.ActionRowBuilder().addComponents(
+            module.exports.getButton({
+                customId: 'CodeRaidCreateRoom',
+                label: 'Create New Room',
+                style: SUCCESS
+            }),
+            module.exports.getButton({
+                customId: 'CodeRaidJoinRoom',
+                label: 'Join Existing Room',
+                style: PRIMARY
+            })
+        );
+    },
+
+    getCodeRaidRoomButtons: function (roomId) {
+        const identifier = JSON.stringify({ "roomId": roomId });
+        return new Discord.ActionRowBuilder().addComponents(
+            module.exports.getButton({
+                customId: `CodeRaidGetNextCode${identifier}`,
+                label: 'Get Next Code',
+                style: PRIMARY
+            }),
+            module.exports.getButton({
+                customId: `CodeRaidCodeFailed${identifier}`,
+                label: 'Code Failed',
+                style: DANGER
+            }),
+            module.exports.getButton({
+                customId: `CodeRaidLeaveRoom${identifier}`,
+                label: 'Leave Room',
+                style: SECONDARY
+            }),
+            module.exports.getButton({
+                customId: `CodeRaidResetProgress${identifier}`,
+                label: 'Reset Progress',
+                style: SECONDARY
+            }),
+            module.exports.getButton({
+                customId: `CodeRaidDeleteRoom${identifier}`,
+                label: 'Delete Room',
+                style: DANGER
+            })
+        );
+    },
+
     getHelpButtons: function () {
         return [
             new Discord.ActionRowBuilder().addComponents(

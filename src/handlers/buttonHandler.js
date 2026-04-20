@@ -1197,6 +1197,237 @@ module.exports = async (client, interaction) => {
         const modal = DiscordModals.getTrackerRemovePlayerModal(guildId, ids.trackerId);
         await interaction.showModal(modal);
     }
+    else if (interaction.customId === 'CodeRaidCreateRoom') {
+        const roomsCount = Object.keys(instance.codeRaidRooms || {}).length;
+        if (roomsCount >= 5) {
+            await client.interactionReply(interaction, {
+                content: 'The maximum number of active rooms (5) has been reached.',
+                ephemeral: true
+            });
+            return;
+        }
+
+        const modal = DiscordModals.getCreateCodeRaidRoomModal(guildId);
+        await interaction.showModal(modal);
+    }
+    else if (interaction.customId === 'CodeRaidJoinRoom') {
+        const roomsCount = Object.keys(instance.codeRaidRooms || {}).length;
+        if (roomsCount === 0) {
+            await client.interactionReply(interaction, {
+                content: 'There are currently no active rooms to join.',
+                ephemeral: true
+            });
+            return;
+        }
+
+        const DiscordSelectMenus = require('../discordTools/discordSelectMenus.js');
+        await client.interactionReply(interaction, {
+            content: 'Select a room to join:',
+            components: [DiscordSelectMenus.getCodeRaidJoinRoomSelectMenu(guildId, instance.codeRaidRooms)],
+            ephemeral: true
+        });
+    }
+    else if (interaction.customId.startsWith('CodeRaidGetNextCode')) {
+        const ids = JSON.parse(interaction.customId.replace('CodeRaidGetNextCode', ''));
+        const room = instance.codeRaidRooms[ids.roomId];
+
+        if (!room) {
+            await client.interactionReply(interaction, { content: 'This room no longer exists.', ephemeral: true });
+            return;
+        }
+
+        if (!room.activeAssignments) room.activeAssignments = {};
+
+        if (room.activeAssignments[interaction.user.id]) {
+            await client.interactionReply(interaction, { content: `You already have an active code assigned: **${room.activeAssignments[interaction.user.id]}**. Please try it or mark it as failed first.`, ephemeral: true });
+            return;
+        }
+
+        const fs = require('fs');
+        const path = require('path');
+
+        if (!client.codeRaidCodesCache) {
+            const codesFilePath = path.join(__dirname, '..', '..', 'codes.txt');
+            if (fs.existsSync(codesFilePath)) {
+                client.codeRaidCodesCache = fs.readFileSync(codesFilePath, 'utf8').split('\n').map(c => c.trim()).filter(c => c.length > 0);
+            } else {
+                await client.interactionReply(interaction, { content: 'Error: codes.txt not found.', ephemeral: true });
+                return;
+            }
+        }
+
+        const codes = client.codeRaidCodesCache;
+
+        const checkedSet = new Set(room.checkedCodes);
+        const assignedSet = new Set(Object.values(room.activeAssignments));
+
+        let nextCode = null;
+        for (const code of codes) {
+            if (!checkedSet.has(code) && !assignedSet.has(code)) {
+                nextCode = code;
+                break;
+            }
+        }
+
+        if (!nextCode) {
+            await client.interactionReply(interaction, { content: 'All codes have been exhausted or are currently assigned.', ephemeral: true });
+            return;
+        }
+
+        room.activeAssignments[interaction.user.id] = nextCode;
+        client.setInstance(guildId, instance);
+
+        await client.interactionReply(interaction, { content: `Your next code is: **${nextCode}**`, ephemeral: true });
+    }
+    else if (interaction.customId.startsWith('CodeRaidCodeFailed')) {
+        const ids = JSON.parse(interaction.customId.replace('CodeRaidCodeFailed', ''));
+        const room = instance.codeRaidRooms[ids.roomId];
+
+        if (!room) {
+            await client.interactionReply(interaction, { content: 'This room no longer exists.', ephemeral: true });
+            return;
+        }
+
+        if (!room.activeAssignments || !room.activeAssignments[interaction.user.id]) {
+            await client.interactionReply(interaction, { content: 'You do not have an active code assigned. Click [Get Next Code] first.', ephemeral: true });
+            return;
+        }
+
+        const failedCode = room.activeAssignments[interaction.user.id];
+        room.checkedCodes.push(failedCode);
+        delete room.activeAssignments[interaction.user.id];
+        client.setInstance(guildId, instance);
+
+        if (room.messageId && instance.channelId.codeRaid) {
+            try {
+                const channel = client.channels.cache.get(instance.channelId.codeRaid);
+                if (channel) {
+                    const message = await channel.messages.fetch(room.messageId);
+                    if (message) {
+                        await message.edit({
+                            embeds: [require('../discordTools/discordEmbeds.js').getCodeRaidRoomEmbed(guildId, room)],
+                            components: [require('../discordTools/discordButtons.js').getCodeRaidRoomButtons(room.id)]
+                        });
+                    }
+                }
+            } catch (e) {
+                // Ignore fetch errors if message is deleted
+            }
+        }
+
+        await DiscordMessages.sendUpdateCodeRaidDashboardMessage(guildId);
+        await client.interactionReply(interaction, { content: `Code **${failedCode}** marked as failed.`, ephemeral: true });
+    }
+    else if (interaction.customId.startsWith('CodeRaidLeaveRoom')) {
+        const ids = JSON.parse(interaction.customId.replace('CodeRaidLeaveRoom', ''));
+        const room = instance.codeRaidRooms[ids.roomId];
+
+        if (!room) {
+            await client.interactionReply(interaction, { content: 'This room no longer exists.', ephemeral: true });
+            return;
+        }
+
+        if (!room.activeAssignments || !room.activeAssignments[interaction.user.id]) {
+            await client.interactionReply(interaction, { content: 'You are not currently assigned any codes in this room.', ephemeral: true });
+            return;
+        }
+
+        const returnedCode = room.activeAssignments[interaction.user.id];
+        delete room.activeAssignments[interaction.user.id];
+        client.setInstance(guildId, instance);
+
+        if (room.messageId && instance.channelId.codeRaid) {
+            try {
+                const channel = client.channels.cache.get(instance.channelId.codeRaid);
+                if (channel) {
+                    const message = await channel.messages.fetch(room.messageId);
+                    if (message) {
+                        await message.edit({
+                            embeds: [require('../discordTools/discordEmbeds.js').getCodeRaidRoomEmbed(guildId, room)],
+                            components: [require('../discordTools/discordButtons.js').getCodeRaidRoomButtons(room.id)]
+                        });
+                    }
+                }
+            } catch (e) {
+                // Ignore fetch errors if message is deleted
+            }
+        }
+
+        await DiscordMessages.sendUpdateCodeRaidDashboardMessage(guildId);
+        await client.interactionReply(interaction, { content: `You have left the room. Your code **${returnedCode}** has been returned to the pool.`, ephemeral: true });
+    }
+    else if (interaction.customId.startsWith('CodeRaidResetProgress')) {
+        const ids = JSON.parse(interaction.customId.replace('CodeRaidResetProgress', ''));
+        const room = instance.codeRaidRooms[ids.roomId];
+
+        if (!room) {
+            await client.interactionReply(interaction, { content: 'This room no longer exists.', ephemeral: true });
+            return;
+        }
+
+        if (interaction.user.id !== room.ownerId) {
+            await client.interactionReply(interaction, { content: 'Only the room creator can reset progress.', ephemeral: true });
+            return;
+        }
+
+        room.checkedCodes = [];
+        room.activeAssignments = {};
+        client.setInstance(guildId, instance);
+
+        if (room.messageId && instance.channelId.codeRaid) {
+            try {
+                const channel = client.channels.cache.get(instance.channelId.codeRaid);
+                if (channel) {
+                    const message = await channel.messages.fetch(room.messageId);
+                    if (message) {
+                        await message.edit({
+                            embeds: [require('../discordTools/discordEmbeds.js').getCodeRaidRoomEmbed(guildId, room)],
+                            components: [require('../discordTools/discordButtons.js').getCodeRaidRoomButtons(room.id)]
+                        });
+                    }
+                }
+            } catch (e) {
+                // Ignore fetch errors
+            }
+        }
+
+        await DiscordMessages.sendUpdateCodeRaidDashboardMessage(guildId);
+        await client.interactionReply(interaction, { content: 'Progress has been reset.', ephemeral: true });
+    }
+    else if (interaction.customId.startsWith('CodeRaidDeleteRoom')) {
+        const ids = JSON.parse(interaction.customId.replace('CodeRaidDeleteRoom', ''));
+        const room = instance.codeRaidRooms[ids.roomId];
+
+        if (!room) {
+            await client.interactionReply(interaction, { content: 'This room no longer exists.', ephemeral: true });
+            return;
+        }
+
+        if (interaction.user.id !== room.ownerId) {
+            await client.interactionReply(interaction, { content: 'Only the room creator can delete the room.', ephemeral: true });
+            return;
+        }
+
+        if (room.messageId && instance.channelId.codeRaid) {
+            try {
+                const channel = client.channels.cache.get(instance.channelId.codeRaid);
+                if (channel) {
+                    const message = await channel.messages.fetch(room.messageId);
+                    if (message) {
+                        await message.delete();
+                    }
+                }
+            } catch (e) {
+                // Ignore fetch errors
+            }
+        }
+
+        delete instance.codeRaidRooms[ids.roomId];
+        client.setInstance(guildId, instance);
+
+        await DiscordMessages.sendUpdateCodeRaidDashboardMessage(guildId);
+        await client.interactionReply(interaction, { content: 'Room deleted.', ephemeral: true });
+    }
     else if (interaction.customId.startsWith('TrackerInGame')) {
         const ids = JSON.parse(interaction.customId.replace('TrackerInGame', ''));
         const tracker = instance.trackers[ids.trackerId];

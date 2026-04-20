@@ -481,6 +481,25 @@ module.exports = {
         }
     },
 
+    sendUpdateCodeRaidDashboardMessage: async function (guildId) {
+        const instance = Client.client.getInstance(guildId);
+
+        if (!instance.channelId.codeRaid) return;
+
+        const content = {
+            embeds: [DiscordEmbeds.getCodeRaidDashboardEmbed(guildId, instance.codeRaidRooms)],
+            components: [DiscordButtons.getCodeRaidDashboardButtons()]
+        }
+
+        const message = await module.exports.sendMessage(guildId, content,
+            instance.informationMessageId.codeRaidDashboard, instance.channelId.codeRaid);
+
+        if (message && message.id !== instance.informationMessageId.codeRaidDashboard) {
+            instance.informationMessageId.codeRaidDashboard = message.id;
+            Client.client.setInstance(guildId, instance);
+        }
+    },
+
     sendUpdateBattlemetricsOnlinePlayersInformationMessage: async function (rustplus, battlemetricsId) {
         const instance = Client.client.getInstance(rustplus.guildId);
 
