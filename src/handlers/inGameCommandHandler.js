@@ -222,6 +222,15 @@ module.exports = {
         else if (commandLowerCase.startsWith(`${prefix}${client.intlGet('en', 'commandSyntaxWtb')} `) ||
             commandLowerCase.startsWith(`${prefix}${client.intlGet(guildId, 'commandSyntaxWtb')} `)) {
             rustplus.sendInGameMessage(rustplus.getCommandWtb(command));
+                else if (commandLowerCase === `${prefix}checkop`) {
+            const embedResponse = rustplus.getCommandCheckop();
+            if (typeof embedResponse === 'string') {
+                rustplus.sendInGameMessage(embedResponse);
+            } else if (embedResponse && embedResponse.data && embedResponse.data.description) {
+                // Remove backticks and diff markers from markdown since in-game doesn't support them well
+                let text = embedResponse.data.description.replace(/```diff/g, '').replace(/```/g, '').replace(/\+ /g, '').trim();
+                rustplus.sendInGameMessage(text);
+            }
         }
         else {
             /* Maybe a custom command? */

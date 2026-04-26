@@ -2304,6 +2304,140 @@ class RustPlus extends RustPlusLib {
         return str;
     }
 
+
+    getCommandCheckop() {
+        const instance = Client.client.getInstance(this.guildId);
+
+        let vendingMachines = [];
+        if (this && this.mapMarkers && this.mapMarkers.vendingMachines) {
+            vendingMachines = this.mapMarkers.vendingMachines;
+        } else if (instance && instance.mapMarkers && instance.mapMarkers.vendingMachines) {
+            vendingMachines = instance.mapMarkers.vendingMachines;
+        } else {
+            return Client.client.intlGet(this.guildId, 'notConnectedToRustServer');
+        }
+
+        const trades = [];
+        for (const vendingMachine of vendingMachines) {
+            if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
+            for (const order of vendingMachine.sellOrders) {
+                if (order.amountInStock === 0) continue;
+
+                const orderItemId = (Client.client.items.itemExist(order.itemId.toString())) ? order.itemId.toString() : null;
+                const orderCurrencyId = (Client.client.items.itemExist(order.currencyId.toString())) ? order.currencyId.toString() : null;
+
+                if (!orderItemId || !orderCurrencyId) continue;
+
+                trades.push({
+                    outputItem: orderItemId,
+                    outputQty: order.quantity,
+                    inputItem: orderCurrencyId,
+                    inputQty: order.costPerItem,
+                    location: (vendingMachine.location && vendingMachine.location.string) ? vendingMachine.location.string : (vendingMachine.name ? vendingMachine.name : 'Vending Machine'),
+                    amountInStock: order.amountInStock,
+                    isRecycle: false
+                });
+            }
+        }
+
+        const maxHops = 3;
+        const opps = [];
+
+        function findPaths(currentItemId, currentQty, visitedItems, currentPath, initialItemId, initialInputQty) {
+            if (currentPath.length > 0 && currentPath.length <= maxHops) {
+                if (currentItemId === initialItemId && currentQty > initialInputQty) {
+                    opps.push({
+                        startItem: initialItemId,
+                        initialInputQty: initialInputQty,
+                        finalQty: currentQty,
+                        profit: currentQty - initialInputQty,
+                        path: [...currentPath]
+                    });
+                }
+            }
+
+            if (currentPath.length >= maxHops) return;
+
+            for (const trade of trades) {
+                if (trade.inputItem === currentItemId) {
+                    if (visitedItems.has(trade.outputItem) && trade.outputItem !== initialItemId) continue;
+
+                    let maxMultiplierWeCanAfford = Math.floor(currentQty / trade.inputQty);
+                    const maxMultiplierFromStock = Math.floor(trade.amountInStock / trade.outputQty);
+                    const multiplier = Math.min(maxMultiplierWeCanAfford, maxMultiplierFromStock);
+
+                    if (multiplier > 0) {
+                        const nextQty = multiplier * trade.outputQty;
+                        const newVisited = new Set(visitedItems);
+                        newVisited.add(trade.outputItem);
+
+                        currentPath.push({ ...trade, hopMultiplier: multiplier, usedInputQty: multiplier * trade.inputQty, producedQty: nextQty });
+                        findPaths(trade.outputItem, nextQty, newVisited, currentPath, initialItemId, initialInputQty);
+                        currentPath.pop();
+                    }
+                }
+            }
+        }
+
+        for (const trade of trades) {
+            const maxMultiplierFromStock = Math.floor(trade.amountInStock / trade.outputQty);
+            if (maxMultiplierFromStock > 0) {
+                const initialVisited = new Set([trade.inputItem, trade.outputItem]);
+                const startPath = [{ ...trade, hopMultiplier: maxMultiplierFromStock, usedInputQty: maxMultiplierFromStock * trade.inputQty, producedQty: maxMultiplierFromStock * trade.outputQty }];
+                findPaths(trade.outputItem, maxMultiplierFromStock * trade.outputQty, initialVisited, startPath, trade.inputItem, maxMultiplierFromStock * trade.inputQty);
+            }
+        }
+
+        const uniqueOpps = new Map();
+        for (const opp of opps) {
+            const key = opp.path.map(p => p.location + '-' + p.inputItem + '-' + p.outputItem).join('|');
+            if (!uniqueOpps.has(key)) {
+                uniqueOpps.set(key, opp);
+            }
+        }
+
+        const sortedOpps = Array.from(uniqueOpps.values());
+        sortedOpps.sort((a, b) => b.profit - a.profit);
+
+        let foundLines = '';
+        for (const opp of sortedOpps) {
+            if (foundLines === '') {
+                foundLines += '```diff\n';
+            }
+
+            let line = '+ ';
+            line += `Start with [${opp.initialInputQty}] ${Client.client.items.getName(opp.startItem)}\n`;
+
+            for (const step of opp.path) {
+                line += `  -> Buy [${step.producedQty}] ${Client.client.items.getName(step.outputItem)} at [${step.location}] for [${step.usedInputQty}] ${Client.client.items.getName(step.inputItem)}\n`;
+            }
+
+            line += `  = Profit: [${opp.profit}] ${Client.client.items.getName(opp.startItem)}\n\n`;
+
+            if (foundLines.length + line.length > 3900) {
+                foundLines += '...\n';
+                break;
+            } else {
+                foundLines += line;
+            }
+        }
+
+        if (foundLines === '') {
+            foundLines = 'No arbitrage opportunities found.';
+        } else {
+            foundLines += '```';
+        }
+
+        const DiscordEmbeds = require('../discordTools/discordEmbeds.js');
+        const Constants = require('../util/constants.js');
+        return DiscordEmbeds.getEmbed({
+            color: Constants.COLOR_DEFAULT,
+            title: `Arbitrage Opportunities`,
+            description: foundLines,
+            footer: { text: instance.serverList && this && this.serverId && instance.serverList[this.serverId] ? instance.serverList[this.serverId].title : 'Offline' }
+        });
+    }
+
     getCommandResearch(command) {
         const prefix = this.generalSettings.prefix;
         const commandResearch = `${prefix}${Client.client.intlGet(this.guildId, 'commandSyntaxResearch')}`;
