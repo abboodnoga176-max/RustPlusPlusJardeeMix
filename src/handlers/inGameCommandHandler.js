@@ -219,6 +219,16 @@ module.exports = {
             commandLowerCase === `${prefix}${client.intlGet(guildId, 'commandSyntaxTravelingVendor')}`) {
             rustplus.sendInGameMessage(rustplus.getCommandTravelingVendor());
         }
+                else if (commandLowerCase === `${prefix}checkop`) {
+            const embedResponse = rustplus.getCommandCheckop();
+            if (typeof embedResponse === 'string') {
+                rustplus.sendInGameMessage(embedResponse);
+            } else if (embedResponse && embedResponse.data && embedResponse.data.description) {
+                // Remove backticks and diff markers from markdown since in-game doesn't support them well
+                let text = embedResponse.data.description.replace(/```diff/g, '').replace(/```/g, '').replace(/\+ /g, '').trim();
+                rustplus.sendInGameMessage(text);
+            }
+        }
         else {
             /* Maybe a custom command? */
 
