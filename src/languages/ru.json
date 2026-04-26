@@ -209,8 +209,6 @@
     "commandsVoiceNotInVoice": "Вы не в голосовом канале.",
     "commandsWipecheckDesc": "Check team stats (deaths, AFK time, play time).",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
     "commandSyntaxAdd": "add",
     "commandSyntaxAfk": "afk",
     "commandSyntaxAlive": "alive",
@@ -812,5 +810,9 @@
     "wipeDetected": "Обнаружен Wipe!",
     "yield": "Урожай",
     "youAreAlreadyLeader": "Вы уже лидер.",
-    "youAreNotPairedWithServer": "Команда лидера не работает, потому что вы не подключены к серверу."
+    "youAreNotPairedWithServer": "Команда лидера не работает, потому что вы не подключены к серверу.",
+    "commandSyntaxWtb": "wtb",
+    "commandsWtbHaveDesc": "The name or ID of the item you have",
+    "commandsWtbAmountDesc": "The amount of the item you have",
+    "commandsWtbWantDesc": "The name or ID of the item you want to get the maximum of"
 }

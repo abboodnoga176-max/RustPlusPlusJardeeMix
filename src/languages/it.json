@@ -209,8 +209,6 @@
     "commandsVoiceNotInVoice": "Non sei in un canale vocale",
     "commandsWipecheckDesc": "Check team stats (deaths, AFK time, play time).",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
     "commandSyntaxAdd": "aggiungi",
     "commandSyntaxAfk": "afk",
     "commandSyntaxAlive": "vivo",
@@ -812,5 +810,9 @@
     "wipeDetected": "Rilevato wipe!",
     "yield": "Yield",
     "youAreAlreadyLeader": "Sei già il leader.",
-    "youAreNotPairedWithServer": "Il comando del leader non funziona perché non sei associato al server."
+    "youAreNotPairedWithServer": "Il comando del leader non funziona perché non sei associato al server.",
+    "commandSyntaxWtb": "wtb",
+    "commandsWtbHaveDesc": "The name or ID of the item you have",
+    "commandsWtbAmountDesc": "The amount of the item you have",
+    "commandsWtbWantDesc": "The name or ID of the item you want to get the maximum of"
 }

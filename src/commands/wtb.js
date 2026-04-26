@@ -22,13 +22,17 @@ module.exports = {
             .setName('wtb')
             .setDescription(client.intlGet(guildId, 'commandsWtbDesc') || 'Find multi-hop trade routes to buy an item')
             .addStringOption(option => option
-                .setName('name')
-                .setDescription(client.intlGet(guildId, 'commandsWtbNameDesc') || 'The name or ID of the item you want to buy')
+                .setName('have')
+                .setDescription(client.intlGet(guildId, 'commandsWtbHaveDesc') || 'The name or ID of the item you have')
                 .setRequired(true))
             .addIntegerOption(option => option
-                .setName('quantity')
-                .setDescription(client.intlGet(guildId, 'commandsWtbQtyDesc') || 'The minimum quantity of the item you want to buy')
-                .setRequired(false));
+                .setName('amount')
+                .setDescription(client.intlGet(guildId, 'commandsWtbAmountDesc') || 'The amount of the item you have')
+                .setRequired(true))
+            .addStringOption(option => option
+                .setName('want')
+                .setDescription(client.intlGet(guildId, 'commandsWtbWantDesc') || 'The name or ID of the item you want to get the maximum of')
+                .setRequired(true));
     },
 
     async execute(client, interaction) {
@@ -54,25 +58,38 @@ module.exports = {
         }
 
         const targetScrapId = "-932201673"; // ID for Scrap
-        const targetSearchString = interaction.options.getString('name');
-        const targetQuantity = interaction.options.getInteger('quantity') || 1;
+        const haveSearchString = interaction.options.getString('have');
+        const haveQuantity = interaction.options.getInteger('amount');
+        const wantSearchString = interaction.options.getString('want');
 
-        let targetItemId = null;
-        if (client.items.itemExist(targetSearchString)) {
-            targetItemId = targetSearchString;
+        let haveItemId = null;
+        if (client.items.itemExist(haveSearchString)) {
+            haveItemId = haveSearchString;
         } else {
-            const item = client.items.getClosestItemIdByName(targetSearchString);
+            const item = client.items.getClosestItemIdByName(haveSearchString);
             if (item === null) {
-                const str = client.intlGet(interaction.guildId, 'noItemWithNameFound', { name: targetSearchString });
+                const str = client.intlGet(interaction.guildId, 'noItemWithNameFound', { name: haveSearchString });
                 await client.interactionEditReply(interaction, DiscordEmbeds.getActionInfoEmbed(1, str));
                 return;
             }
-            targetItemId = item;
+            haveItemId = item;
         }
 
-        const targetItemName = client.items.getName(targetItemId);
+        let wantItemId = null;
+        if (client.items.itemExist(wantSearchString)) {
+            wantItemId = wantSearchString;
+        } else {
+            const item = client.items.getClosestItemIdByName(wantSearchString);
+            if (item === null) {
+                const str = client.intlGet(interaction.guildId, 'noItemWithNameFound', { name: wantSearchString });
+                await client.interactionEditReply(interaction, DiscordEmbeds.getActionInfoEmbed(1, str));
+                return;
+            }
+            wantItemId = item;
+        }
 
-
+        const haveItemName = client.items.getName(haveItemId);
+        const wantItemName = client.items.getName(wantItemId);
 
         const SCRAP_FEE = 20;
         const trades = [];
@@ -106,7 +123,6 @@ module.exports = {
 
                 if (data['safe-zone-recycler'] && data['safe-zone-recycler'].yield) {
                     for (const yieldItem of data['safe-zone-recycler'].yield) {
-                        // Only consider guaranteed yields for reliable trade paths
                         if (yieldItem.probability === 1) {
                             trades.push({
                                 outputItem: yieldItem.id.toString(),
@@ -125,96 +141,76 @@ module.exports = {
 
         const validPaths = [];
 
-        function findPaths(currentItemId, qtyNeeded, visitedItems, currentPath, totalScrapFees) {
-            if (currentPath.length > 0) {
+        function findPaths(currentItemId, currentQty, visitedItems, currentPath, totalScrapFees) {
+            if (currentItemId === wantItemId) {
                 validPaths.push({
-                    startItem: currentItemId,
-                    normalizedQty: qtyNeeded,
+                    startItem: haveItemId,
+                    startQty: haveQuantity,
+                    finalItem: currentItemId,
+                    finalQty: currentQty,
                     totalScrapFees: totalScrapFees,
                     path: [...currentPath]
                 });
+                return;
             }
 
             if (currentPath.length >= 5) return;
 
             for (const trade of trades) {
-                if (trade.outputItem === currentItemId) {
-                    if (visitedItems.has(trade.inputItem)) continue;
+                if (trade.inputItem === currentItemId) {
+                    if (visitedItems.has(trade.outputItem)) continue;
 
-                    const multiplier = Math.ceil(qtyNeeded / trade.outputQty);
-                    const nextQtyNeeded = multiplier * trade.inputQty;
-                    const nextScrapFees = totalScrapFees + (trade.isRecycle ? 0 : SCRAP_FEE);
+                    let costPerMult = trade.inputQty;
+                    let fee = (trade.isRecycle ? 0 : SCRAP_FEE);
+
+                    let maxMultiplier = Math.floor(currentQty / costPerMult);
+
+                    if (currentItemId === targetScrapId && fee > 0) {
+                        maxMultiplier = Math.floor((currentQty - fee) / costPerMult);
+                    }
+
+                    let maxStockMultiplier = Math.floor(trade.amountInStock / trade.outputQty);
+                    if (maxMultiplier > maxStockMultiplier) {
+                        maxMultiplier = maxStockMultiplier;
+                    }
+
+                    if (maxMultiplier <= 0) continue;
+
+                    const nextQty = maxMultiplier * trade.outputQty;
+                    const nextScrapFees = totalScrapFees + fee;
 
                     const newVisited = new Set(visitedItems);
-                    newVisited.add(trade.inputItem);
+                    newVisited.add(trade.outputItem);
 
-                    currentPath.push({ ...trade, hopMultiplier: multiplier });
-                    findPaths(trade.inputItem, nextQtyNeeded, newVisited, currentPath, nextScrapFees);
+                    currentPath.push({ ...trade, hopMultiplier: maxMultiplier });
+                    findPaths(trade.outputItem, nextQty, newVisited, currentPath, nextScrapFees);
                     currentPath.pop();
                 }
             }
         }
 
-        const initialVisited = new Set([targetItemId.toString()]);
-        findPaths(targetItemId.toString(), targetQuantity, initialVisited, [], 0);
+        findPaths(haveItemId.toString(), haveQuantity, new Set([haveItemId.toString()]), [], 0);
 
-
-        // Debug output
-        console.log(`Found ${validPaths.length} paths.`);
-
-        // Filtering and Deduplication
+        // Deduplication and sorting
         const bestPaths = new Map();
 
         for (const p of validPaths) {
-            const currentBest = bestPaths.get(p.startItem);
+            const key = p.path.map(step => `${step.inputItem}-${step.outputItem}-${step.location}`).join('|');
+            const currentBest = bestPaths.get(key);
 
-            if (!currentBest) {
-                bestPaths.set(p.startItem, p);
-            } else {
-                const pYield = p.path[0].hopMultiplier * p.path[0].outputQty;
-                const currentBestYield = currentBest.path[0].hopMultiplier * currentBest.path[0].outputQty;
-
-                const pRatio = p.normalizedQty / pYield;
-                const currentBestRatio = currentBest.normalizedQty / currentBestYield;
-
-                if (pRatio < currentBestRatio) {
-                    bestPaths.set(p.startItem, p);
-                } else if (pRatio === currentBestRatio) {
-                    const pScrapFeePerYield = p.totalScrapFees / pYield;
-                    const currentBestScrapFeePerYield = currentBest.totalScrapFees / currentBestYield;
-
-                    if (pScrapFeePerYield < currentBestScrapFeePerYield) {
-                        bestPaths.set(p.startItem, p);
-                    } else if (pScrapFeePerYield === currentBestScrapFeePerYield) {
-                        if (pYield > currentBestYield) {
-                            bestPaths.set(p.startItem, p);
-                        }
-                    }
-                }
+            if (!currentBest || p.finalQty > currentBest.finalQty) {
+                bestPaths.set(key, p);
+            } else if (p.finalQty === currentBest.finalQty && p.totalScrapFees < currentBest.totalScrapFees) {
+                bestPaths.set(key, p);
             }
         }
 
         const sortedBestPaths = Array.from(bestPaths.values());
-
         sortedBestPaths.sort((a, b) => {
-            const aYield = a.path[0].hopMultiplier * a.path[0].outputQty;
-            const bYield = b.path[0].hopMultiplier * b.path[0].outputQty;
-
-            const aScrapCost = a.totalScrapFees + (a.startItem === targetScrapId ? a.normalizedQty : 0);
-            const bScrapCost = b.totalScrapFees + (b.startItem === targetScrapId ? b.normalizedQty : 0);
-
-            const aScrapCostPerYield = aScrapCost / aYield;
-            const bScrapCostPerYield = bScrapCost / bYield;
-
-            if (aScrapCostPerYield !== bScrapCostPerYield) {
-                return aScrapCostPerYield - bScrapCostPerYield;
+            if (a.finalQty !== b.finalQty) {
+                return b.finalQty - a.finalQty; // descending final yield
             }
-
-            if (aYield !== bYield) {
-                return bYield - aYield; // descending yield
-            }
-
-            return a.normalizedQty - b.normalizedQty; // ascending input qty
+            return a.totalScrapFees - b.totalScrapFees; // ascending scrap fee
         });
 
         let foundLines = '';
@@ -223,29 +219,20 @@ module.exports = {
                 foundLines += '```diff\n';
             }
 
-            // Format: [Qty] [Start Item] -> [Grid] -> [Qty] [Intermediate] -> [Grid] -> [Qty] [Target]
-            // We want to format the path from start to end (forward direction)
-            // p.path is currently stored backwards (from target to start).
-            // Let's reverse it.
-            const forwardPath = [...p.path].reverse();
+            let line = '+ ';
+            let runningQty = p.startQty;
+            line += `[${Math.floor(runningQty)}] ${client.items.getName(p.startItem)} `;
 
-            let line = `+ `;
-
-            let runningQty = p.normalizedQty;
-            line += `[${Math.ceil(runningQty)}] ${client.items.getName(p.startItem)} `;
-
-            for (const step of forwardPath) {
+            for (const step of p.path) {
                 line += `-> [${step.location}] -> `;
-                // To display what happens after this step:
-                // output of this step = hopMultiplier * step.outputQty
                 runningQty = step.hopMultiplier * step.outputQty;
-                line += `[${Math.ceil(runningQty)}] ${client.items.getName(step.outputItem)} `;
+                line += `[${Math.floor(runningQty)}] ${client.items.getName(step.outputItem)} `;
             }
 
             line += `(Total Fees: ${p.totalScrapFees} Scrap)\n`;
 
             if (foundLines.length + line.length > 3900) {
-                foundLines += `...\n`;
+                foundLines += '...\n';
                 break;
             } else {
                 foundLines += line;
@@ -260,7 +247,7 @@ module.exports = {
 
         const embed = DiscordEmbeds.getEmbed({
             color: Constants.COLOR_DEFAULT,
-            title: `Trade Routes for ${targetItemName}`,
+            title: `Trade Routes: ${haveItemName} -> ${wantItemName}`,
             description: foundLines,
             footer: { text: instance.serverList && rustplus && rustplus.serverId && instance.serverList[rustplus.serverId] ? instance.serverList[rustplus.serverId].title : 'Offline' }
         });

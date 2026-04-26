@@ -209,8 +209,6 @@
     "commandsVoiceNotInVoice": "You are not in a voicechannel",
     "commandsWipecheckDesc": "Check team stats (deaths, AFK time, play time).",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
     "commandSyntaxAdd": "add",
     "commandSyntaxAfk": "afk",
     "commandSyntaxAlive": "alive",
@@ -812,5 +810,9 @@
     "wipeDetected": "Wipe tespit edildi!",
     "yield": "Teslim Ol",
     "youAreAlreadyLeader": "Zaten lidersin.",
-    "youAreNotPairedWithServer": "Sunucuyla eşleşmediğiniz için lider komutu çalışmıyor."
+    "youAreNotPairedWithServer": "Sunucuyla eşleşmediğiniz için lider komutu çalışmıyor.",
+    "commandSyntaxWtb": "wtb",
+    "commandsWtbHaveDesc": "The name or ID of the item you have",
+    "commandsWtbAmountDesc": "The amount of the item you have",
+    "commandsWtbWantDesc": "The name or ID of the item you want to get the maximum of"
 }
