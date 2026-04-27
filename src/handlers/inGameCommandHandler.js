@@ -222,7 +222,8 @@ module.exports = {
         else if (commandLowerCase.startsWith(`${prefix}${client.intlGet('en', 'commandSyntaxWtb')} `) ||
             commandLowerCase.startsWith(`${prefix}${client.intlGet(guildId, 'commandSyntaxWtb')} `)) {
             rustplus.sendInGameMessage(rustplus.getCommandWtb(command));
-                else if (commandLowerCase === `${prefix}checkop`) {
+        }
+        else if (commandLowerCase === `${prefix}checkop`) {
             const embedResponse = rustplus.getCommandCheckop();
             if (typeof embedResponse === 'string') {
                 rustplus.sendInGameMessage(embedResponse);
