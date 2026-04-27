@@ -2941,6 +2941,219 @@ class RustPlus extends RustPlusLib {
         }
     }
 
+
+    getCommandWtb(command) {
+        const guildId = this.guildId;
+        const instance = Client.client.getInstance(guildId);
+        const prefix = this.generalSettings.prefix;
+
+        let wtbCommandStr = `${prefix}${Client.client.intlGet(guildId, 'commandSyntaxWtb')} `;
+        let wtbCommandEnStr = `${prefix}${Client.client.intlGet('en', 'commandSyntaxWtb')} `;
+
+        if (command.toLowerCase().startsWith(wtbCommandStr)) {
+            command = command.slice(wtbCommandStr.length).trim();
+        } else if (command.toLowerCase().startsWith(wtbCommandEnStr)) {
+            command = command.slice(wtbCommandEnStr.length).trim();
+        }
+
+        const args = command.split(' ');
+        if (args.length < 3) {
+            return Client.client.intlGet(guildId, 'commandSyntaxWtb') + " [have] [amount] [want]";
+        }
+
+        const wantSearchString = args.pop();
+        const haveQuantity = parseInt(args.pop(), 10);
+        const haveSearchString = args.join(' ');
+
+        if (isNaN(haveQuantity) || haveQuantity <= 0) {
+            return "Amount must be a positive integer.";
+        }
+
+        let haveItemId = null;
+        if (Client.client.items.itemExist(haveSearchString)) {
+            haveItemId = haveSearchString;
+        } else {
+            const item = Client.client.items.getClosestItemIdByName(haveSearchString);
+            if (item === null) {
+                return Client.client.intlGet(guildId, 'noItemWithNameFound', { name: haveSearchString });
+            }
+            haveItemId = item;
+        }
+
+        let wantItemId = null;
+        if (Client.client.items.itemExist(wantSearchString)) {
+            wantItemId = wantSearchString;
+        } else {
+            const item = Client.client.items.getClosestItemIdByName(wantSearchString);
+            if (item === null) {
+                return Client.client.intlGet(guildId, 'noItemWithNameFound', { name: wantSearchString });
+            }
+            wantItemId = item;
+        }
+
+        const targetScrapId = "-932201673"; // ID for Scrap
+        const haveItemName = Client.client.items.getName(haveItemId);
+        const wantItemName = Client.client.items.getName(wantItemId);
+
+        const SCRAP_FEE = 20;
+        const trades = [];
+        for (const vendingMachine of this.mapMarkers.vendingMachines) {
+            if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
+            for (const order of vendingMachine.sellOrders) {
+                if (order.amountInStock === 0) continue;
+
+                const orderItemId = (Client.client.items.itemExist(order.itemId.toString())) ? order.itemId.toString() : null;
+                const orderCurrencyId = (Client.client.items.itemExist(order.currencyId.toString())) ? order.currencyId.toString() : null;
+
+                if (!orderItemId || !orderCurrencyId) continue;
+
+                trades.push({
+                    outputItem: orderItemId,
+                    outputQty: order.quantity,
+                    inputItem: orderCurrencyId,
+                    inputQty: order.costPerItem,
+                    location: vendingMachine.location.string,
+                    amountInStock: order.amountInStock
+                });
+            }
+        }
+
+        // Add recycle trades
+        const path = require('path');
+        let allowedRecycleItems = {};
+        try {
+            const configPath = path.resolve(__dirname, '../../config/allowedRecycleItems.json');
+            if (require('fs').existsSync(configPath)) {
+                allowedRecycleItems = JSON.parse(require('fs').readFileSync(configPath, 'utf-8'));
+            }
+        } catch (err) {}
+
+        if (Client.client.rustlabs && Client.client.rustlabs.recycleData) {
+            for (const [recycleItemId, data] of Object.entries(Client.client.rustlabs.recycleData)) {
+                if (!allowedRecycleItems[recycleItemId] || !allowedRecycleItems[recycleItemId].allowed) {
+                    continue;
+                }
+
+                if (data['safe-zone-recycler'] && data['safe-zone-recycler'].yield) {
+                    for (const yieldItem of data['safe-zone-recycler'].yield) {
+                        if (yieldItem.probability === 1) {
+                            trades.push({
+                                outputItem: yieldItem.id.toString(),
+                                outputQty: yieldItem.quantity,
+                                inputItem: recycleItemId.toString(),
+                                inputQty: 1,
+                                location: 'Safe Zone Recycler',
+                                amountInStock: 999999,
+                                isRecycle: true
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        const validPaths = [];
+
+        function findPaths(currentItemId, currentQty, visitedItems, currentPath, totalScrapFees) {
+            if (currentItemId === wantItemId) {
+                validPaths.push({
+                    startItem: haveItemId,
+                    startQty: haveQuantity,
+                    finalItem: currentItemId,
+                    finalQty: currentQty,
+                    totalScrapFees: totalScrapFees,
+                    path: [...currentPath]
+                });
+                return;
+            }
+
+            if (currentPath.length >= 5) return;
+
+            for (const trade of trades) {
+                if (trade.inputItem === currentItemId) {
+                    if (visitedItems.has(trade.outputItem)) continue;
+
+                    let costPerMult = trade.inputQty;
+                    let fee = (trade.isRecycle ? 0 : SCRAP_FEE);
+
+                    let maxMultiplier = Math.floor(currentQty / costPerMult);
+
+                    if (currentItemId === targetScrapId && fee > 0) {
+                        maxMultiplier = Math.floor((currentQty - fee) / costPerMult);
+                    }
+
+                    let maxStockMultiplier = Math.floor(trade.amountInStock / trade.outputQty);
+                    if (maxMultiplier > maxStockMultiplier) {
+                        maxMultiplier = maxStockMultiplier;
+                    }
+
+                    if (maxMultiplier <= 0) continue;
+
+                    const nextQty = maxMultiplier * trade.outputQty;
+                    const nextScrapFees = totalScrapFees + fee;
+
+                    const newVisited = new Set(visitedItems);
+                    newVisited.add(trade.outputItem);
+
+                    currentPath.push({ ...trade, hopMultiplier: maxMultiplier });
+                    findPaths(trade.outputItem, nextQty, newVisited, currentPath, nextScrapFees);
+                    currentPath.pop();
+                }
+            }
+        }
+
+        findPaths(haveItemId.toString(), haveQuantity, new Set([haveItemId.toString()]), [], 0);
+
+        const bestPaths = new Map();
+
+        for (const p of validPaths) {
+            const key = p.path.map(step => `${step.inputItem}-${step.outputItem}-${step.location}`).join('|');
+            const currentBest = bestPaths.get(key);
+
+            if (!currentBest || p.finalQty > currentBest.finalQty) {
+                bestPaths.set(key, p);
+            } else if (p.finalQty === currentBest.finalQty && p.totalScrapFees < currentBest.totalScrapFees) {
+                bestPaths.set(key, p);
+            }
+        }
+
+        const sortedBestPaths = Array.from(bestPaths.values());
+        sortedBestPaths.sort((a, b) => {
+            if (a.finalQty !== b.finalQty) {
+                return b.finalQty - a.finalQty; // descending final yield
+            }
+            return a.totalScrapFees - b.totalScrapFees; // ascending scrap fee
+        });
+
+        if (sortedBestPaths.length === 0) {
+            return Client.client.intlGet(guildId, 'noItemFound') || 'No trades found...';
+        }
+
+        let foundLines = `Trade Routes: ${haveItemName} -> ${wantItemName}\n`;
+        for (const p of sortedBestPaths) {
+            let line = '+ ';
+            let runningQty = p.startQty;
+            line += `[${Math.floor(runningQty)}] ${Client.client.items.getName(p.startItem)} `;
+
+            for (const step of p.path) {
+                line += `-> [${step.location}] -> `;
+                runningQty = step.hopMultiplier * step.outputQty;
+                line += `[${Math.floor(runningQty)}] ${Client.client.items.getName(step.outputItem)} `;
+            }
+
+            line += `(Total Fees: ${p.totalScrapFees} Scrap)\n`;
+
+            if (foundLines.length + line.length > 200) {
+                foundLines += '...';
+                break;
+            } else {
+                foundLines += line;
+            }
+        }
+
+        return foundLines;
+    }
+
     getCommandTravelingVendor(isInfoChannel = false) {
         const strings = [];
         for (const travelingVendor of this.mapMarkers.travelingVendors) {

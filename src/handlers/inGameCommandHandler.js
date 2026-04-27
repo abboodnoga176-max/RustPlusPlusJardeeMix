@@ -219,6 +219,9 @@ module.exports = {
             commandLowerCase === `${prefix}${client.intlGet(guildId, 'commandSyntaxTravelingVendor')}`) {
             rustplus.sendInGameMessage(rustplus.getCommandTravelingVendor());
         }
+        else if (commandLowerCase.startsWith(`${prefix}${client.intlGet('en', 'commandSyntaxWtb')} `) ||
+            commandLowerCase.startsWith(`${prefix}${client.intlGet(guildId, 'commandSyntaxWtb')} `)) {
+            rustplus.sendInGameMessage(rustplus.getCommandWtb(command));
                 else if (commandLowerCase === `${prefix}checkop`) {
             const embedResponse = rustplus.getCommandCheckop();
             if (typeof embedResponse === 'string') {

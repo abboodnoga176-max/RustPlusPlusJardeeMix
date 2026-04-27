@@ -209,8 +209,6 @@
     "commandsVoiceNotInVoice": "You are not in a voicechannel",
     "commandsWipecheckDesc": "Check team stats (deaths, AFK time, play time).",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
     "commandSyntaxAdd": "add",
     "commandSyntaxAfk": "afk",
     "commandSyntaxAlive": "alive",
@@ -812,5 +810,9 @@
     "wipeDetected": "서버 초기화가 감지되었습니다!",
     "yield": "Yield",
     "youAreAlreadyLeader": "당신은 이미 팀 리더 입니다.",
-    "youAreNotPairedWithServer": "서버와 페어링되지 않았기 때문에 리더 명령어가 작동하지 않습니다."
+    "youAreNotPairedWithServer": "서버와 페어링되지 않았기 때문에 리더 명령어가 작동하지 않습니다.",
+    "commandSyntaxWtb": "wtb",
+    "commandsWtbHaveDesc": "The name or ID of the item you have",
+    "commandsWtbAmountDesc": "The amount of the item you have",
+    "commandsWtbWantDesc": "The name or ID of the item you want to get the maximum of"
 }

@@ -204,6 +204,9 @@ module.exports = {
             commandLowerCase === `${prefix}${client.intlGet(guildId, 'commandSyntaxTravelingVendor')}`) {
             response = rustplus.getCommandTravelingVendor();
         }
+        else if (commandLowerCase.startsWith(`${prefix}${client.intlGet('en', 'commandSyntaxWtb')} `) ||
+            commandLowerCase.startsWith(`${prefix}${client.intlGet(guildId, 'commandSyntaxWtb')} `)) {
+            response = rustplus.getCommandWtb(command);
 
         else if (commandLowerCase === `${prefix}checkop`) {
             response = rustplus.getCommandCheckop();

@@ -64,6 +64,7 @@ module.exports = {
             client.intlGet(guildId, 'commandSyntaxUpkeep'),
             client.intlGet(guildId, 'commandSyntaxUptime'),
             client.intlGet(guildId, 'commandSyntaxWipe'),
+            client.intlGet(guildId, 'commandSyntaxWtb'),
             client.intlGet(guildId, 'commandSyntaxWipecheck'),
             client.intlGet('en', 'commandSyntaxAfk'),
             client.intlGet('en', 'commandSyntaxAlive'),
@@ -108,6 +109,7 @@ module.exports = {
             client.intlGet('en', 'commandSyntaxUpkeep'),
             client.intlGet('en', 'commandSyntaxUptime'),
             client.intlGet('en', 'commandSyntaxWipe'),
+            client.intlGet('en', 'commandSyntaxWtb'),
             client.intlGet('en', 'commandSyntaxWipecheck')
         ];
     },

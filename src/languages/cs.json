@@ -209,8 +209,6 @@
     "commandsVoiceNotInVoice": "Nejsi připojen do hlasového kanálu",
     "commandsWipecheckDesc": "Check team stats (deaths, AFK time, play time).",
     "commandsWtbDesc": "Find multi-hop trade routes to buy an item",
-    "commandsWtbNameDesc": "The name or ID of the item you want to buy",
-    "commandsWtbQtyDesc": "The minimum quantity of the item you want to buy",
     "commandSyntaxAdd": "přidat",
     "commandSyntaxAfk": "afk",
     "commandSyntaxAlive": "živý",
@@ -812,5 +810,9 @@
     "wipeDetected": "Wipe byl detekován!",
     "yield": "Úrodnost",
     "youAreAlreadyLeader": "Už jsi vůdce.",
-    "youAreNotPairedWithServer": "Příkaz na vůdce nefunguje, protože nejsi spárován se serverem."
+    "youAreNotPairedWithServer": "Příkaz na vůdce nefunguje, protože nejsi spárován se serverem.",
+    "commandSyntaxWtb": "wtb",
+    "commandsWtbHaveDesc": "The name or ID of the item you have",
+    "commandsWtbAmountDesc": "The amount of the item you have",
+    "commandsWtbWantDesc": "The name or ID of the item you want to get the maximum of"
 }
