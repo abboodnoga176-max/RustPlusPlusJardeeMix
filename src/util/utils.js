@@ -20,8 +20,13 @@
 
 const Fs = require('fs');
 const Path = require('path');
+const crypto = require('crypto');
 
 module.exports = {
+    getRandomInt: function (min, max) {
+        return crypto.randomInt(min, max);
+    },
+
     parseArgs: function (str) {
         return str.trim().split(/[ ]+/);
     },
