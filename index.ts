@@ -65,4 +65,4 @@ process.on('unhandledRejection', error => {
     console.log(error);
 });
 
-exports.client = client;
+export { client };
