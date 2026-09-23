@@ -232,7 +232,7 @@ class MapMarkers {
 
         for (let marker of this.getMarkersOfType(type, markers)) {
             if (this.isMarkerPresentByTypeXY(type, marker.x, marker.y)) {
-                leftMarkersOfType = leftMarkersOfType.filter(e => e.x !== marker.x) || e.y !== marker.y;
+                leftMarkersOfType = leftMarkersOfType.filter(e => e.x !== marker.x || e.y !== marker.y);
             }
         }
 
@@ -326,7 +326,7 @@ class MapMarkers {
 
         /* VendingMachine markers that have left. */
         for (let marker of leftMarkers) {
-            this.vendingMachines = this.vendingMachines.filter(e => e.x !== marker.x) || e.y !== marker.y;
+            this.vendingMachines = this.vendingMachines.filter(e => e.x !== marker.x || e.y !== marker.y);
         }
 
         /* VendingMachine markers that still remains. */
