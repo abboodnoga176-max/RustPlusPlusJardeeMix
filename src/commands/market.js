@@ -156,7 +156,7 @@ module.exports = {
                 const leftString = client.intlGet(interaction.guildId, 'remain');
                 const matchingOrders = [];
                 for (const vendingMachine of rustplus.mapMarkers.vendingMachines) {
-                    if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
+                    if (!vendingMachine.sellOrders) continue;
 
                     for (const order of vendingMachine.sellOrders) {
                         if (order.amountInStock === 0) continue;

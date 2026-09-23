@@ -1728,7 +1728,7 @@ class RustPlus extends RustPlusLib {
 
                 const bestOrders = {};
                 for (const vendingMachine of this.mapMarkers.vendingMachines) {
-                    if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
+                    if (!vendingMachine.sellOrders) continue;
 
                     for (const order of vendingMachine.sellOrders) {
                         if (order.amountInStock === 0) continue;
@@ -2319,7 +2319,7 @@ class RustPlus extends RustPlusLib {
 
         const trades = [];
         for (const vendingMachine of vendingMachines) {
-            if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
+            if (!vendingMachine.sellOrders) continue;
             for (const order of vendingMachine.sellOrders) {
                 if (order.amountInStock === 0) continue;
 
@@ -2998,7 +2998,7 @@ class RustPlus extends RustPlusLib {
         const SCRAP_FEE = 20;
         const trades = [];
         for (const vendingMachine of this.mapMarkers.vendingMachines) {
-            if (!vendingMachine.hasOwnProperty('sellOrders')) continue;
+            if (!vendingMachine.sellOrders) continue;
             for (const order of vendingMachine.sellOrders) {
                 if (order.amountInStock === 0) continue;
 
