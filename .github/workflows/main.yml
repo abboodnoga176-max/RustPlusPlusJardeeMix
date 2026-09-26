@@ -30,4 +30,5 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           local_path: './'
           remote_path: '/'
+          sftp_only: true
           args: '-o ConnectTimeout=5'
