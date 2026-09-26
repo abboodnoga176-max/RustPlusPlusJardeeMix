@@ -24,7 +24,7 @@ const Jimp = require('jimp');
 const Path = require('path');
 
 const Constants = require('../util/constants.js');
-const Client = require('../../index');
+const Client = require('../../index.ts');
 
 class Map {
     constructor(map, rustplus) {

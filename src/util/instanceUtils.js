@@ -21,7 +21,7 @@
 const Fs = require('fs');
 const Path = require('path');
 
-const Client = require('../../index');
+const Client = require('../../index.ts');
 
 module.exports = {
     getSmartDevice: function (guildId, entityId) {
