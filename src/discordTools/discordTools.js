@@ -20,7 +20,7 @@
 
 const Discord = require('discord.js');
 
-const Client = require('../../index');
+const Client = require('../../index.ts');
 
 module.exports = {
     getGuild: function (guildId) {
